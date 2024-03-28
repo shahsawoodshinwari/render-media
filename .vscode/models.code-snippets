@@ -1,28 +1,39 @@
-// models.code.snippets
-<?php
-"guarded-attributes": {
+{
+  "guarded-attributes": {
     "prefix": "gu",
     "body": [
-        "    /**",
-        "     * The attributes that aren't mass assignable.",
-        "     *",
-        "     * @var array",
-        "     */",
-        "    protected $guarded = [\"id\"];"
+      "    /**",
+      "     * The attributes that aren't mass assignable.",
+      "     *",
+      "     * @var array",
+      "     */",
+      "    protected $$guarded = [\"id\"];"
     ],
     "description": "The attributes that aren't mass assignable."
-}
-
-<?php
-"register-media-collections": {
+  },
+  "register-media-collections": {
     "prefix": "media",
     "body": [
-        "    /**",
-        "     * Register the media collections.",
-        "     */",
-        "    public function registerMediaCollections(): void",
-        "    {",
-        "    }"
+      "    /**",
+      "     * Register the media collections.",
+      "     */",
+      "    public function registerMediaCollections(): void",
+      "    {",
+      "        // Add your media collections here",
+      "    }"
     ],
     "description": "Register the media collections."
+  },
+  "table-name": {
+    "prefix": "table",
+    "body": [
+      "    /**",
+      "     * The table associated with the model.",
+      "     *",
+      "     * @var string",
+      "     */",
+      "    protected $$table = \"users\";"
+    ],
+    "description": "The table associated with the model."
+  }
 }
