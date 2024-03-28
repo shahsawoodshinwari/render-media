@@ -1,0 +1,28 @@
+// models.code.snippets
+<?php
+"guarded-attributes": {
+    "prefix": "gu",
+    "body": [
+        "    /**",
+        "     * The attributes that aren't mass assignable.",
+        "     *",
+        "     * @var array",
+        "     */",
+        "    protected $guarded = [\"id\"];"
+    ],
+    "description": "The attributes that aren't mass assignable."
+}
+
+<?php
+"register-media-collections": {
+    "prefix": "media",
+    "body": [
+        "    /**",
+        "     * Register the media collections.",
+        "     */",
+        "    public function registerMediaCollections(): void",
+        "    {",
+        "    }"
+    ],
+    "description": "Register the media collections."
+}

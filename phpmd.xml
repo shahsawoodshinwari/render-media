@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="Madrasa Project PHP Rules">
+  <description>Madrasa Project PHP Rules that ensures good coding practices</description>
+
+  <fileExtensions>
+    <include suffix="php" />
+  </fileExtensions>
+
+  <exclude-pattern>vendor/</exclude-pattern>
+  <exclude-pattern>storage/</exclude-pattern>
+  <exclude-pattern>tests/</exclude-pattern>
+
+  <rule ref="resources/rulesets/cleancode.xml" />
+  <rule ref="resources/rulesets/codesize.xml" />
+  <rule ref="resources/rulesets/controversial.xml" />
+  <rule ref="resources/rulesets/design.xml" />
+  <rule ref="resources/rulesets/naming.xml" />
+</ruleset>
