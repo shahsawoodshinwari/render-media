@@ -8,6 +8,7 @@
         "php": "^8.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.5",
         "shaka/dynamic-update-trait": "^1.0",
         "spatie/laravel-medialibrary": "^11.4",
         "spatie/laravel-sluggable": "^3.6"
@@ -24,6 +25,9 @@
         "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/General.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
