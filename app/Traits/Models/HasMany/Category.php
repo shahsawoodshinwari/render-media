@@ -9,7 +9,7 @@ trait Category
   /**
    * Get all of the sub categories for the category.
    */
-  public function subCategories(): HasMany
+  public function children(): HasMany
   {
     return $this->hasMany(static::class, 'parent_id');
   }

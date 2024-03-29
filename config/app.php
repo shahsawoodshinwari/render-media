@@ -123,4 +123,6 @@ return [
     'store' => env('APP_MAINTENANCE_STORE', 'database'),
   ],
 
+  'api_key' => 'eyJpdiI6IjBxZEdST1BscWlVdVRnNWZXT05TM2c9PSIsInZhbHVlIjoiMXJMdzZmMEg4dGZaNjdUTm1mYVZpUzNBdDdjT0NWUW5wd1JIVU9DbzlFbz0iLCJtYWMiOiJiYWVlYTU1NTc3Mjg2ZmYwYmMwNDY1ZWRmYzQ4ZTY1NGIyNDkzNTVkNDBmMzBmZjhhMWY0MDJhNTc2MmUwM2JkIiwidGFnIjoiIn0=',
+
 ];

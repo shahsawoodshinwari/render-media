@@ -2,7 +2,7 @@ const body = $('body');
 const html = $('html');
 
 function quixSettings({version, layout, navheaderBg, headerBg, sidebarStyle, sidebarBg, sidebarPosition, headerPosition, containerLayout, direction}) {
-    this.version = version || "dark";
+    this.version = version || "light";
     this.layout = layout || "vertical";
     this.navheaderBg = navheaderBg || "color_1";
     this.headerBg = headerBg || "color_1";

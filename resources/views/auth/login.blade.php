@@ -31,6 +31,14 @@
                   @enderror
                 </div>
 
+                <!-- Rember me -->
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox mr-sm-2">
+                    <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
+                  </div>
+                </div>
+
                 <!-- submit -->
                 <button type="submit" class="btn login-form__btn submit w-100">{{ __('Login') }}</button>
               </form>

@@ -2,7 +2,7 @@
 
 /**
  * Get theme asset path
- * 
+ *
  * @param string  $file
  */
 function theme($file): string

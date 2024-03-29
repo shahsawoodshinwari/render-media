@@ -7,4 +7,4 @@ Route::middleware('auth')->group(function () {
   Route::get('/', DashboardController::class)->name('dashboard');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
