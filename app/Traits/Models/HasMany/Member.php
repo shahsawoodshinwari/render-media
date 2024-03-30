@@ -3,6 +3,7 @@
 namespace App\Traits\Models\HasMany;
 
 use App\Models\Booking;
+use App\Models\ContactUs;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait Member
@@ -13,5 +14,13 @@ trait Member
   public function bookings(): HasMany
   {
     return $this->hasMany(Booking::class);
+  }
+
+  /**
+   * Get all of the member's contact form submissions.
+   */
+  public function contactForms(): HasMany
+  {
+    return $this->hasMany(ContactUs::class);
   }
 }

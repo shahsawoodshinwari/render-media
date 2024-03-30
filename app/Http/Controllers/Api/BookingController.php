@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookingResource;
 use App\Enums\Booking\PaymentStatusEnum;
 use App\Enums\Booking\RequestStatusEnum;
 use App\Http\Requests\Api\StoreBookingRequest;
+use App\Http\Requests\Api\RescheduleBookingRequest;
 
 class BookingController extends Controller
 {
@@ -41,5 +43,17 @@ class BookingController extends Controller
     return response()->json([
       'message' => 'Thanks for submitting your request. Our team will get in touch with you shortly.',
     ], 201);
+  }
+
+  /**
+   * Reschedule the resource in storage.
+   */
+  public function reschedule(Booking $booking, RescheduleBookingRequest $request)
+  {
+    $booking->update($request->validated());
+
+    return response()->json([
+      'message' => 'Booking successfully rescheduled.',
+    ]);
   }
 }

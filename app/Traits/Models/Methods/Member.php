@@ -7,8 +7,10 @@ trait Member
   /**
    * Create a personal access token
    */
-  public function createPersonalAccessToken(string $name = 'Personal Access Token', array $abilities = ['*'])
-  {
-    return $this->createToken('Personal Access Token');
+  public function createPersonalAccessToken(
+    string $name = 'Personal Access Token',
+    array $abilities = ['*']
+  ) {
+    return $this->createToken($name, $abilities);
   }
 }

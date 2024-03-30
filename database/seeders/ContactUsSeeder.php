@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders\CMS;
+namespace Database\Seeders;
 
-use App\Models\CMS\ContactUs;
+use App\Models\ContactUs;
 use Illuminate\Database\Seeder;
 
 class ContactUsSeeder extends Seeder

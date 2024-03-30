@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\CMS;
 
 use App\Http\Controllers\Controller;
 use App\Models\CMS\TermsAndConditions;
-use Illuminate\Http\Request;
+use App\Http\Resources\CMS\TermsAndConditionsResource;
 
 class TermsAndConditionsController extends Controller
 {
@@ -13,6 +13,14 @@ class TermsAndConditionsController extends Controller
    */
   public function index()
   {
-    $termsAndConditions = TermsAndConditions::latest()->get();
+    $termsAndConditions = TermsAndConditions::latest();
+
+    $termsAndConditions = $this->shouldPaginate ? $termsAndConditions->paginate() : $termsAndConditions->get();
+
+    return response()->json(
+      TermsAndConditionsResource::collection($termsAndConditions)
+        ->response()
+        ->getData(true)
+    );
   }
 }

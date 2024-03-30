@@ -18,6 +18,31 @@ class AboutUsFactory extends Factory
   {
     return [
       'contents' => fake()->randomHtml(),
+      'published' => fake()->boolean(),
     ];
+  }
+
+  /**
+   * Set the published state to true.
+   */
+  public function published(): static
+  {
+    return $this->state(function (array $attributes) {
+      return [
+        'published' => true,
+      ];
+    });
+  }
+
+  /**
+   * Set the published state to false.
+   */
+  public function unpublished(): static
+  {
+    return $this->state(function (array $attributes) {
+      return [
+        'published' => false,
+      ];
+    });
   }
 }

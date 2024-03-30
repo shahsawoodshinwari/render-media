@@ -23,7 +23,7 @@ class LoginResource extends JsonResource
       'phone'  => $this->phone,
       'gender' => $this->gender,
       'verified' => $this->hasVerifiedEmail(),
-      'token'  => $this->createPersonalAccessToken()->plainTextToken,
+      'token'  => $this->when($request->withToken ?? true, $this->createPersonalAccessToken()->plainTextToken),
       'image'  => $this->image?->getUrl() ?? asset('assets/members/avatar.png'),
     ];
   }

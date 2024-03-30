@@ -35,5 +35,18 @@
       "    protected $$table = \"users\";"
     ],
     "description": "The table associated with the model."
+  },
+  "booted": {
+    "prefix": "booted",
+    "body": [
+      "    /**",
+      "     * The \"booted\" method of the model.",
+      "     */",
+      "    protected static function booted(): void",
+      "    {",
+      "        // Add your boot logic here",
+      "    }"
+    ],
+    "description": "The \"booted\" method of the model."
   }
 }

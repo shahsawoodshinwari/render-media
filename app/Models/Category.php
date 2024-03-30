@@ -33,8 +33,6 @@ class Category extends Model implements HasMedia
    */
   public const COVER = 'Cover';
 
-  protected $perPage = 10;
-
   /**
    * The attributes that aren't mass assignable.
    *
