@@ -4,7 +4,7 @@ namespace App\Traits\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
 
-trait AboutUs
+trait Page
 {
   /**
    * Filter results to include only published records.

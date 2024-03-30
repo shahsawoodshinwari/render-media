@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\CMS\FAQSeeder;
-use Database\Seeders\CMS\AboutUsSeeder;
-use Database\Seeders\CMS\TermsAndConditionsSeeder;
+use Database\Seeders\CMS\PageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,10 +17,8 @@ class DatabaseSeeder extends Seeder
       SuperAdminSeeder::class,
       MemberSeeder::class,
       CategorySeeder::class,
-      AboutUsSeeder::class,
-      ContactUsSeeder::class,
+      PageSeeder::class,
       FAQSeeder::class,
-      TermsAndConditionsSeeder::class,
     ]);
   }
 }

@@ -10,8 +10,9 @@ return new class () extends Migration {
    */
   public function up(): void
   {
-    Schema::create('about_us', function (Blueprint $table) {
+    Schema::create('pages', function (Blueprint $table) {
       $table->id();
+      $table->string('name');
       $table->text('contents');
       $table->boolean('published')->default(false);
       $table->timestamps();
@@ -23,6 +24,6 @@ return new class () extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('about_us');
+    Schema::dropIfExists('pages');
   }
 };

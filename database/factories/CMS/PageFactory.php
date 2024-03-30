@@ -2,12 +2,13 @@
 
 namespace Database\Factories\CMS;
 
+use App\Enums\CMS\PageEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class TermsAndConditionsFactory extends Factory
+class PageFactory extends Factory
 {
   /**
    * Define the model's default state.
@@ -17,8 +18,9 @@ class TermsAndConditionsFactory extends Factory
   public function definition(): array
   {
     return [
-      'title' => fake()->sentence(),
-      'description' => fake()->text(),
+      'name'     => fake()->randomElement(PageEnum::values()),
+      'contents' => fake()->randomHtml(),
+      'published'  => fake()->boolean(),
     ];
   }
 }
