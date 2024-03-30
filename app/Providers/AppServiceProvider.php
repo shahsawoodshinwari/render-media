@@ -5,6 +5,7 @@ namespace App\Providers;
 use Ichtrojan\Otp\Otp;
 use App\Notifications\VerifyEmail;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
 
     VerifyEmail::createUrlUsing(function (object $notifiable) {
       return (new Otp())->generate($notifiable->email, 'numeric', 5, 10)->token;
+    });
+
+    Password::defaults(function () {
+      $rule = Password::min(8);
+
+      return $this->app->isProduction()
+        ? $rule->min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()
+        : $rule;
     });
   }
 }

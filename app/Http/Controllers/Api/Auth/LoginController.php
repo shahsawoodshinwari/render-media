@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LoginResource;
-use App\Http\Requests\Api\LoginRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller

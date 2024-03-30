@@ -28,6 +28,7 @@ return new class () extends Migration {
 
       $table->float('lat')->nullable();
       $table->float('lng')->nullable();
+      $table->string('address')->nullable();
       $table->date('date')->nullable();
       $table->time('time')->nullable();
 

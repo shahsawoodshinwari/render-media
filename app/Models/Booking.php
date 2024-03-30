@@ -8,10 +8,14 @@ use App\Enums\Booking\PaymentStatusEnum;
 use App\Enums\Booking\RequestStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
+use App\Traits\Models\Methods\Booking as MethodsBooking;
+use App\Traits\Models\BelongsTo\Booking as BelongsToBooking;
 
 class Booking extends Model
 {
   use HasFactory;
+  use MethodsBooking;
+  use BelongsToBooking;
   use DynamicUpdateTrait;
 
   /**
@@ -35,5 +39,15 @@ class Booking extends Model
       'date'           => 'datetime',
       'time'           => 'datetime',
     ];
+  }
+
+  /**
+   * The "booted" method of the model.
+   */
+  protected static function booted(): void
+  {
+    static::creating(function (self $booking) {
+      $booking->booking_id = now()->getTimestamp();
+    });
   }
 }

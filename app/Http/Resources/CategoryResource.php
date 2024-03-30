@@ -16,9 +16,8 @@ class CategoryResource extends JsonResource
   {
     return [
       'id'    => $this->id,
-      'slug'  => $this->slug,
       'name'  => $this->name,
-      'cover' => MediaResource::make($this->cover),
+      'cover' => $this->cover?->getUrl(),
       'children' => self::collection($this->children),
     ];
   }

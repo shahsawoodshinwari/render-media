@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Auth;
 
 use App\Models\Member;
 use App\Rules\NameRule;
@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
       'email'      => ['required', 'string', 'email', 'max:255', Rule::unique(Member::class, 'email')],
       'phone'      => ['required', 'phone:AE', 'string', 'max:255', Rule::unique(Member::class, 'phone')],
       'gender'     => ['required', Rule::enum(GenderEnum::class)],
-      'password'   => ['required', 'string', Password::min(8)->mixedCase()->symbols()->uncompromised(), 'confirmed'],
+      'password'   => ['required', 'string', Password::defaults(), 'confirmed'],
       'privacy'    => ['accepted'],
     ];
   }
