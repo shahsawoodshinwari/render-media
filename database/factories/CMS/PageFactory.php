@@ -23,4 +23,14 @@ class PageFactory extends Factory
       'published'  => fake()->boolean(),
     ];
   }
+
+  /**
+   * Set published status to true or false
+   */
+  public function published(bool $status = true): static
+  {
+    return $this->state(fn (array $attributes) => [
+      'published' => $status,
+    ]);
+  }
 }

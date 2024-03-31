@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('bookings', BookingController::class)->only(['index', 'store']);
     Route::apiResource('contact-us', ContactUsController::class)->only('store');
     Route::apiResource('categories', CategoryController::class)->only('index');
-    
+
     Route::prefix('cms')->group(function () {
       Route::apiResource('faqs', FAQController::class)->only('index');
       Route::apiResource('pages/{page}', PageController::class)->only('index');
