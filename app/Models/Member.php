@@ -9,6 +9,7 @@ use App\Notifications\VerifyEmail;
 use App\Traits\Notifications\Notifiable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPasswordNotification;
 use App\Traits\Models\HasOne\Member as HasOneMember;
 use App\Traits\Models\HasMany\Member as HasManyMember;
 use App\Traits\Models\Methods\Member as MethodsMember;
@@ -61,6 +62,16 @@ class Member extends Authenticatable implements MustVerifyEmail, HasMedia
   public function sendEmailVerificationNotification(): void
   {
     $this->notify(new VerifyEmail());
+  }
+
+  /**
+   * Send a password reset notification to the user.
+   *
+   * @param  string  $token
+   */
+  public function sendPasswordResetNotification($token): void
+  {
+    $this->notify(new ResetPasswordNotification($token));
   }
 
   /**

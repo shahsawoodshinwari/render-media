@@ -29,7 +29,7 @@ class PageFactory extends Factory
    */
   public function published(bool $status = true): static
   {
-    return $this->state(fn (array $attributes) => [
+    return $this->state(fn(array $attributes) => [
       'published' => $status,
     ]);
   }

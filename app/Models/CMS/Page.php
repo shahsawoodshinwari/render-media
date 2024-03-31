@@ -6,11 +6,11 @@ use App\Enums\CMS\PageEnum;
 use App\Observers\CMS\PageObserver;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Models\Scopes\Page as ScopesPage;
+use App\Traits\Models\Methods\Page as MethodsPage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
 use App\Traits\Models\Attributes\Page as AttributesPage;
-use App\Traits\Models\Methods\Page as MethodsPage;
 
 #[ObservedBy([PageObserver::class])]
 class Page extends Model
