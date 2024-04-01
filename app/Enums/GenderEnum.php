@@ -8,7 +8,7 @@ enum GenderEnum: string
 {
   use EnumFormatTrait;
 
-  case MALE = 'male';
-  case FEMALE = 'female';
-  case OTHER = 'other';
+  case MALE   = 'Male';
+  case FEMALE = 'Female';
+  case OTHER  = 'Other';
 }

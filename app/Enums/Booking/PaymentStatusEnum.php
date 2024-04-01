@@ -8,7 +8,7 @@ enum PaymentStatusEnum: string
 {
   use EnumFormatTrait;
 
-  case PENDING = 'Pending';
-  case SUCCESS = 'Success';
-  case FAILED = 'Failed';
+  case PAID    = 'Paid';
+  case UNPAID  = 'Unpaid';
+  case PARTIAL = 'Partial';
 }

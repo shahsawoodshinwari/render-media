@@ -9,5 +9,5 @@ enum ShootingTypeEnum: string
   use EnumFormatTrait;
 
   case INDIVIDUAL = 'Individual';
-  case GROUP      = 'Group';
+  case BUSINESS   = 'Business';
 }

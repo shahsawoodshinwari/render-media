@@ -14,6 +14,7 @@ class LoginResource extends JsonResource
    */
   public function toArray(Request $request): array
   {
+    dd($request->all());
     return [
       'id'     => $this->id,
       'first_name' => $this->first_name,
@@ -24,7 +25,7 @@ class LoginResource extends JsonResource
       'gender' => $this->gender,
       'verified' => $this->hasVerifiedEmail(),
       'token'  => $this->when($request->withToken ?? true, $this->createPersonalAccessToken()->plainTextToken),
-      'image'  => $this->image?->getUrl() ?? asset('assets/members/avatar.png'),
+      'image'  => $this->avatar?->getUrl() ?? asset('assets/members/avatar.png'),
     ];
   }
 }

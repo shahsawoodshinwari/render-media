@@ -8,9 +8,8 @@ enum RequestStatusEnum: string
 {
   use EnumFormatTrait;
 
-  case PENDING   = 'Pending';
-  case ACCEPTED  = 'Accepted';
-  case REJECTED  = 'Rejected';
-  case CANCELLED = 'Cancelled';
+  case PENDING     = 'Pending';
+  case ACCEPTED    = 'Accepted';
+  case CANCELLED   = 'Cancelled';
   case RESCHEDULED = 'Rescheduled';
 }

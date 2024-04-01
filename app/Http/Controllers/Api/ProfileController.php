@@ -54,7 +54,7 @@ class ProfileController extends Controller
    */
   public function updateProfilePicture(UpdateProfilePictureRequest $request)
   {
-    $request->user()->addMedia($request->file('avatar'))
+    $request->user()->addMediaFromRequest('avatar')
       ->toMediaCollection($request->user()::AVATAR);
 
     $request->withToken(false);
