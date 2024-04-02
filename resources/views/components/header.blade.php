@@ -1,6 +1,3 @@
-<!--**********************************
-            Header start
-***********************************-->
 <div class="header">
   <div class="header-content clearfix">
 
@@ -24,7 +21,8 @@
     </div>
     <div class="header-right">
       <ul class="clearfix">
-        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
+        <li class="icons dropdown">
+          <a href="javascript:void(0)" data-toggle="dropdown">
             <i class="mdi mdi-email-outline"></i>
             <span class="badge badge-pill gradient-1">3</span>
           </a>
@@ -144,6 +142,7 @@
             <div class="dropdown-content-body">
               <ul>
                 <li><a href="javascript:void()">English</a></li>
+                <li><a href="javascript:void()">Dutch</a></li>
               </ul>
             </div>
           </div>
@@ -170,7 +169,7 @@
                 <li>
                   <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                 </li>
-                <li><a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="icon-key"></i> <span>Logout</span></a></li>
+                <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
               </ul>
             </div>
           </div>
@@ -179,9 +178,3 @@
     </div>
   </div>
 </div>
-<form action="{{ route('logout') }}" method="POST" class="d-none" id="logout-form">
-  @csrf
-</form>
-<!--**********************************
-            Header end ti-comment-alt
-***********************************-->

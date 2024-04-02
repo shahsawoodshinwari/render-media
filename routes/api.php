@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\FreelanerController;
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
@@ -28,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('update-password', PasswordController::class);
     Route::post('update-profile-picture', [ProfileController::class, 'updateProfilePicture']);
     Route::post('bookings/{booking}/reschedule', [BookingController::class, 'reschedule']);
+    Route::post('become-freelancer', FreelanerController::class);
 
     Route::singleton('profile', ProfileController::class)->destroyable()->only(['show', 'update', 'destroy']);
 

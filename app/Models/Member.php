@@ -18,6 +18,30 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
 use App\Traits\Models\Attributes\Member as AttributesMember;
 
+/**
+ * Represents a member of the application.
+ *
+ * The Member class represents a user of the application.
+ * It extends the Authenticatable class, which is part of the Laravel authentication
+ * system, and implements the MustVerifyEmail interface, which requires the user
+ * to verify their email address. The class also implements the HasMedia interface,
+ * which allows the user to have media attached to them.
+ *
+ * The Member class has the following constants:
+ *   - AVATAR: The string "Avatar", which represents the name of the media collection
+ *     for the user's avatar.
+ *
+ * The Member class has the following properties:
+ *   - $guarded: An array of strings, representing the attributes that are not mass assignable.
+ *     It consists of the string "id".
+ *
+ * The Member class has the following methods:
+ *   - casts(): An array of strings, representing the attributes that should be casted.
+ *     It consists of the key-value pair "password" => "hashed".
+ *   - sendEmailVerificationNotification(): Sends the email verification notification to the user.
+ *   - sendPasswordResetNotification($token): Sends a password reset notification to the user.
+ *   - registerMediaCollections(): Registers the media collections for the user.
+ */
 class Member extends Authenticatable implements MustVerifyEmail, HasMedia
 {
   use HasFactory;

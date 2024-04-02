@@ -6,14 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>{{ config('app.name') }}</title>
+  <title>{{ isset($title) ? "$title | " : '' }}{{ config('app.name') }}</title>
 
+  <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="{{ theme('images/favicon.png') }}">
 
-  <link href="{{ theme('plugins/pg-calendar/css/pignose.calendar.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ theme('plugins/chartist/css/chartist.min.css') }}">
-  <link rel="stylesheet" href="{{ theme('plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css') }}">
+  <!-- Custom Stylesheet -->
   <link href="{{ theme('css/style.css') }}" rel="stylesheet">
+
+  @stack('css')
+
 </head>
 
 <body>
@@ -32,16 +34,54 @@
         Preloader end
     ********************-->
 
-    <x-navbar />
-    <x-header />
-    <x-sidebar />
-
 
   <!--**********************************
         Main wrapper start
     ***********************************-->
   <div id="main-wrapper">
-    @yield('content')
+
+    <!--**********************************
+            Nav header start
+        ***********************************-->
+    <x-navbar></x-navbar>
+    <!--**********************************
+            Nav header end
+        ***********************************-->
+
+    <!--**********************************
+            Header start
+        ***********************************-->
+    <x-header></x-header>
+    <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+    <!--**********************************
+            Sidebar start
+        ***********************************-->
+    <x-sidebar></x-sidebar>
+    <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+    <!--**********************************
+            Content body start
+        ***********************************-->
+    <div class="content-body">
+      @yield('content')
+    </div>
+    <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+    <!--**********************************
+            Footer start
+        ***********************************-->
+    <x-footer></x-footer>
+    <!--**********************************
+            Footer end
+        ***********************************-->
   </div>
   <!--**********************************
         Main wrapper end
@@ -56,33 +96,7 @@
   <script src="{{ theme('js/gleek.js') }}"></script>
   <script src="{{ theme('js/styleSwitcher.js') }}"></script>
 
-  <!-- Chartjs -->
-  <script src="{{ theme('plugins/chart.js/Chart.bundle.min.js') }}"></script>
-
-  <!-- Circle progress -->
-  <script src="{{ theme('plugins/circle-progress/circle-progress.min.js') }}"></script>
-
-  <!-- Datamap -->
-  <script src="{{ theme('plugins/d3v3/index.js') }}"></script>
-  <script src="{{ theme('plugins/topojson/topojson.min.js') }}"></script>
-  <script src="{{ theme('plugins/datamaps/datamaps.world.min.js') }}"></script>
-
-  <!-- Morrisjs -->
-  <script src="{{ theme('plugins/raphael/raphael.min.js') }}"></script>
-  <script src="{{ theme('plugins/morris/morris.min.js') }}"></script>
-
-  <!-- Pignose Calender -->
-  <script src="{{ theme('plugins/moment/moment.min.js') }}"></script>
-  <script src="{{ theme('plugins/pg-calendar/js/pignose.calendar.min.js') }}"></script>
-
-  <!-- ChartistJS -->
-  <script src="{{ theme('plugins/chartist/js/chartist.min.js') }}"></script>
-  <script src="{{ theme('plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script>
-
-
-
-  <script src="{{ theme('js/dashboard/dashboard-1.js') }}"></script>
-
+  @stack('js')
 </body>
 
 </html>

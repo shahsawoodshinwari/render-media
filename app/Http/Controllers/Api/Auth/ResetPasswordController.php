@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Models\Member;
 use Ichtrojan\Otp\Otp;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\LoginResource;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
-use App\Http\Resources\LoginResource;
 
 class ResetPasswordController extends Controller
 {
