@@ -14,6 +14,12 @@
   <!-- Custom Stylesheet -->
   <link href="{{ theme('css/style.css') }}" rel="stylesheet">
 
+  <style>
+    .no-padding .dataTables_wrapper {
+      padding: 0px !important;
+    }
+  </style>
+
   @stack('css')
 
 </head>

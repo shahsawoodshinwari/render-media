@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMemberRequest;
 
 class MemberController extends Controller
 {
@@ -22,13 +23,13 @@ class MemberController extends Controller
    */
   public function create()
   {
-    //
+    return response()->view('members.create');
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreMemberRequest $request)
   {
     //
   }

@@ -8,8 +8,11 @@
 <div class="container-fluid" style="padding-top: 30px;padding-bottom: 30px">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">{{ __('Members') }}</h4>
-      <div class="table-responsive">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="card-title">{{ __('Members') }}</h4>
+        <a href="{{ route('members.create') }}" class="btn btn-primary">{{ __('Add New Member') }}</a>
+      </div>
+      <div class="table-responsive no-padding">
         <table class="table table-striped table-bordered zero-configuration text-center">
           <thead>
             <tr>
