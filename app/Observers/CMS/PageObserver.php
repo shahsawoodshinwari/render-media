@@ -14,7 +14,6 @@ class PageObserver implements ShouldHandleEventsAfterCommit
   public function created(Page $page): void
   {
     if ($page->published) {
-      Log::debug('PageObserver::created: ' . $page->name);
       Page::whereName($page->name)->published()->update(['published' => false]);
     }
   }
@@ -25,7 +24,6 @@ class PageObserver implements ShouldHandleEventsAfterCommit
   public function updated(Page $page): void
   {
     if ($page->published) {
-      Log::debug('PageObserver::updated: ' . $page->name);
       Page::whereName($page->name)->published()->update(['published' => false]);
     }
   }
@@ -36,7 +34,6 @@ class PageObserver implements ShouldHandleEventsAfterCommit
   public function deleting(Page $page): void
   {
     if ($page->published) {
-      Log::debug('PageObserver::deleting: ' . $page->name);
       Page::whereName($page->name)->limit(1)
         ->inRandomOrder()
         ->update(['published' => false]);
@@ -49,7 +46,6 @@ class PageObserver implements ShouldHandleEventsAfterCommit
   public function restored(Page $page): void
   {
     if ($page->published) {
-      Log::debug('PageObserver::restored: ' . $page->name);
       Page::whereName($page->name)->published()->update(['published' => false]);
     }
   }
@@ -60,7 +56,6 @@ class PageObserver implements ShouldHandleEventsAfterCommit
   public function forceDeleting(Page $page): void
   {
     if ($page->published) {
-      Log::debug('PageObserver::forceDeleting: ' . $page->name);
       Page::whereName($page->name)->limit(1)
         ->inRandomOrder()
         ->update(['published' => false]);
