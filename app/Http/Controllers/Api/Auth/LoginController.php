@@ -14,10 +14,10 @@ class LoginController extends Controller
 {
   public function login(LoginRequest $request)
   {
-    if (Auth::guard(GuardEnum::MEMBERS)->attempt($request->only('email', 'password'), $request->remember)) {
+    if (Auth::guard(GuardEnum::MEMBERS->value)->attempt($request->only('email', 'password'), $request->remember)) {
 
       return response()->json(
-        LoginResource::make(Auth::guard(GuardEnum::MEMBERS)->user())
+        LoginResource::make(Auth::guard(GuardEnum::MEMBERS->value)->user())
           ->response()
           ->getData(true)
       );
