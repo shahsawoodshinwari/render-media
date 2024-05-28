@@ -19,6 +19,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 Route::post('register', [RegisterController::class, 'register']);
+Route::post('become-freelancer', FreelanerController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::post('email/resend', [VerificationController::class, 'resend']);
@@ -29,7 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('update-password', PasswordController::class);
     Route::post('update-profile-picture', [ProfileController::class, 'updateProfilePicture']);
     Route::post('bookings/{booking}/reschedule', [BookingController::class, 'reschedule']);
-    Route::post('become-freelancer', FreelanerController::class);
 
     Route::singleton('profile', ProfileController::class)->destroyable()->only(['show', 'update', 'destroy']);
 
