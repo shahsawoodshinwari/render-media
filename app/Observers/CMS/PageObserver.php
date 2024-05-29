@@ -3,7 +3,6 @@
 namespace App\Observers\CMS;
 
 use App\Models\CMS\Page;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
 class PageObserver implements ShouldHandleEventsAfterCommit

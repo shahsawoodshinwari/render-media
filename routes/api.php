@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CMS\PageController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FreelanerController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\Auth\PasswordController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
@@ -20,6 +21,8 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('become-freelancer', FreelanerController::class);
+
+Route::resource('sub-categories', SubCategoryController::class)->only('index');
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::post('email/resend', [VerificationController::class, 'resend']);
