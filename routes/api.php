@@ -14,12 +14,15 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\SubCategoryController;
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('become-freelancer', FreelanerController::class);
+
+Route::resource('sub-categories', SubCategoryController::class)->only('index');
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::post('email/resend', [VerificationController::class, 'resend']);
