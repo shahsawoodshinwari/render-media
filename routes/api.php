@@ -9,12 +9,12 @@ use App\Http\Controllers\Api\CMS\PageController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FreelanerController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\Auth\PasswordController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
-use App\Http\Controllers\Api\SubCategoryController;
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
