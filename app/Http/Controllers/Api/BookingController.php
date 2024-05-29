@@ -36,7 +36,7 @@ class BookingController extends Controller
   {
     $request->user()->bookings()->create([
       'request_status' => RequestStatusEnum::PENDING,
-      'payment_status' => PaymentStatusEnum::PENDING,
+      'payment_status' => PaymentStatusEnum::UNPAID,
       ...$request->validated(),
     ]);
 
