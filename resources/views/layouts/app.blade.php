@@ -12,11 +12,24 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ theme('images/favicon.png') }}">
 
   <!-- Custom Stylesheet -->
+  <link href="{{ theme('plugins/sweetalert/css/sweetalert.css') }}" rel="stylesheet">
   <link href="{{ theme('css/style.css') }}" rel="stylesheet">
 
   <style>
     .no-padding .dataTables_wrapper {
       padding: 0px !important;
+    }
+
+    .top-50 {
+      top: 50%;
+    }
+
+    .end-0 {
+      right: 0;
+    }
+
+    .translate-middle-y {
+      transform: translateY(-50%);
     }
   </style>
 
@@ -90,19 +103,23 @@
         ***********************************-->
   </div>
   <!--**********************************
-        Main wrapper end
-    ***********************************-->
+      Main wrapper end
+      ***********************************-->
 
   <!--**********************************
-        Scripts
-    ***********************************-->
+  Scripts
+  ***********************************-->
+  <x-messages></x-messages>
+
   <script src="{{ theme('plugins/common/common.min.js') }}"></script>
   <script src="{{ theme('js/custom.min.js') }}"></script>
   <script src="{{ theme('js/settings.js') }}"></script>
   <script src="{{ theme('js/gleek.js') }}"></script>
   <script src="{{ theme('js/styleSwitcher.js') }}"></script>
+  <script src="{{ theme('plugins/sweetalert/js/sweetalert.min.js') }}"></script>
 
   @stack('js')
+
 </body>
 
 </html>

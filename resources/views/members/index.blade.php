@@ -15,42 +15,34 @@
       <div class="table-responsive no-padding">
         <table class="table table-striped table-bordered zero-configuration text-center">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Verified</th>
-              <th>Actions</th>
-            </tr>
+            @include('members.headers')
           </thead>
           <tbody>
             @foreach ($members as $member)
             <tr>
               <td>
-                <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" class="rounded-circle mr-3" width="30" alt="{{ $member->name }} {{ __('Profile Picture') }}">
-                {{ $member->name }}
+                <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" class="rounded-circle" width="30" alt="{{ $member->name }} {{ __('Profile Picture') }}">
               </td>
-              <td>{{ $member->email }}</td>
-              <td>{{ $member->phone }}</td>
-              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $member->deleted_at ? 'Deleted' : 'Active' }}">
+              <td>
+                <span>
+                  {{ $member->name }}
+                </span>
+              </td>
+              <td class="text-nowrap">{{ $member->email }}</td>
+              <td class="text-nowrap">{{ $member->phone }}</td>
+              <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __($member->deleted_at ? 'Deleted' : 'Active') }}">
                 <i class="fa fa-<?php echo $member->deleted_at ? 'times-circle text-danger' : 'check-circle text-success'; ?>"></i>
               </td>
               <td>
-                <i class="fa fa-<?php echo $member->email_verified_at ? 'check-circle text-success' : 'times-circle text-danger'; ?>"></i>
+                <i class="fa fa-<?php echo $member->hasVerifiedEmail() ? 'check-circle text-success' : 'times-circle text-danger'; ?>"></i>
               </td>
-              <td>---</td>
+              <td>
+                @include('members.actions')
+              </td>
             </tr>
             @endforeach
           <tfoot>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Verified</th>
-              <th>Actions</th>
-            </tr>
+            @include('members.headers')
           </tfoot>
         </table>
       </div>

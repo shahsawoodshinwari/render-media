@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMemberRequest extends FormRequest
+class UpdateMemberRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -29,11 +29,10 @@ class StoreMemberRequest extends FormRequest
     return [
       'first_name' => ['required', 'string', 'max:255', new NameRule()],
       'last_name'  => ['required', 'string', 'max:255', new NameRule()],
-      'email'      => ['required', 'email', 'max:255', Rule::unique((new Member())->getTable(), 'email')],
-      'phone'      => ['required', 'string', 'phone:AE', 'max:255', Rule::unique((new Member())->getTable(), 'phone')],
+      'email'      => ['required', 'email', 'max:255', Rule::unique((new Member())->getTable(), 'email')->ignore($this->member->id)],
+      'phone'      => ['required', 'string', 'phone:AE', 'max:255', Rule::unique((new Member())->getTable(), 'phone')->ignore($this->member->id)],
       'gender'     => ['required', Rule::enum(GenderEnum::class)],
       'dob'        => ['nullable', 'date', 'before:today'],
-      'password'   => ['required', 'string', Password::defaults(), 'confirmed'],
     ];
   }
 }

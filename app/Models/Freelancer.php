@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
+use App\Traits\Models\Attributes\Freelancer as FreelancerAttributes;
 
 class Freelancer extends Model
 {
   use HasFactory;
   use SoftDeletes;
   use DynamicUpdateTrait;
+  use FreelancerAttributes;
 
   /**
    * The attributes that aren't mass assignable.
