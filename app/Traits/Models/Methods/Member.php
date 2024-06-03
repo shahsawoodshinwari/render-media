@@ -13,4 +13,14 @@ trait Member
   ) {
     return $this->createToken($name, $abilities);
   }
+
+  /**
+   * Mark email as not verified
+   */
+  public function markEmailAsNotVerified(): void
+  {
+    $this->forceFill([
+      'email_verified_at' => null,
+    ])->save();
+  }
 }

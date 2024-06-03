@@ -1,0 +1,9 @@
+<tr>
+  <th></th>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Phone</th>
+  <th>Status</th>
+  <th>Verified</th>
+  <th>Actions</th>
+</tr>
