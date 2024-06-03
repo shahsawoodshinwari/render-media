@@ -7,11 +7,19 @@
       <div class="card">
         <div class="card-body">
           <div class="media align-items-center mb-4">
-            <img class="mr-3" src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="80" height="80" alt="">
+            <label class="mr-3" for="avatar">
+              <img class="cursor-pointer rounded-circle" src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="80" height="80" alt="">
+            </label>
             <div class="media-body">
               <h3 class="mb-0">{{ $member->name }}</h3>
             </div>
           </div>
+
+          <form action="{{ route('members.profile-picture.update', $member) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input type="file" name="avatar" onchange="this.form.submit();" id="avatar" accept="image/*" class="d-none">
+          </form>
 
           <h4>{{ __('About Me') }}</h4>
           <ul class="card-profile__info">

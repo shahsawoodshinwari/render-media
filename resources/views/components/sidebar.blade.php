@@ -1,35 +1,21 @@
 <aside class="nk-sidebar">
   <div class="nk-nav-scroll">
     <ul class="metismenu" id="menu">
-      <li class="nav-label">Dashboard</li>
+      <li class="nav-label">{{ __('Dashboard') }}</li>
       <li @class(['active' => request()->routeIs('dashboard')])>
         <a href="{{ route('dashboard') }}" @class(['active' => request()->routeIs('dashboard')])>
-        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+        <i class="icon-speedometer menu-icon"></i><span class="nav-text">{{ __('Dashboard') }}</span>
         </a>
       </li>
       <li @class(['active' => request()->routeIs('members.*')])>
         <a href="{{ route('members.index') }}" @class(['active' => request()->routeIs('members.*')])>
-        <i class="icon-people menu-icon"></i><span class="nav-text">Members</span>
+        <i class="icon-people menu-icon"></i><span class="nav-text">{{ __('Members') }}</span>
         </a>
       </li>
-      <li class="mega-menu mega-menu-sm">
-        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-          <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
+      <li @class(['active' => request()->routeIs('freelancers.*')])>
+        <a href="javascript:void()" @class(['active' => request()->routeIs('freelancers.*')])>
+          <i class="icon-globe-alt menu-icon"></i><span class="nav-text">{{ __('Freelancers') }}</span>
         </a>
-        <ul aria-expanded="false">
-          <li><a href="./layout-blank.html">Blank</a></li>
-          <li><a href="./layout-one-column.html">One Column</a></li>
-          <li><a href="./layout-two-column.html">Two column</a></li>
-          <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-          <li><a href="./layout-vertical.html">Vertical</a></li>
-          <li><a href="./layout-horizontal.html">Horizontal</a></li>
-          <li><a href="./layout-boxed.html">Boxed</a></li>
-          <li><a href="./layout-wide.html">Wide</a></li>
-
-
-          <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-          <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-        </ul>
       </li>
       <li class="nav-label">Apps</li>
       <li>

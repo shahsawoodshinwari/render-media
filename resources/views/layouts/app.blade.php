@@ -14,30 +14,7 @@
   <!-- Custom Stylesheet -->
   <link href="{{ theme('plugins/sweetalert/css/sweetalert.css') }}" rel="stylesheet">
   <link href="{{ theme('css/style.css') }}" rel="stylesheet">
-
-  <style>
-    .no-padding .dataTables_wrapper {
-      padding: 0px !important;
-    }
-
-    .top-50 {
-      top: 50%;
-    }
-
-    .end-0 {
-      right: 0;
-    }
-
-    .translate-middle-y {
-      transform: translateY(-50%);
-    }
-
-    .btn-close {
-      background-color: none;
-      border: none;
-      font-size: large;
-    }
-  </style>
+  <link href="{{ asset('assets/css/global.css') }}" rel="stylesheet">
 
   @stack('css')
 
