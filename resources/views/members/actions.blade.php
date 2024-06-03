@@ -22,6 +22,13 @@
     @method('PATCH')
   </form>
   @endif
+  <!-- Change Password -->
+  <a href="{{ route('members.password.edit', $member) }}" data-toggle="tooltip" data-placement="top" title="{{ __('Change Password') }}">
+    <span data-toggle="modal" data-target="#change-password-{{ $member->id }}-modal">
+      <i class="fa fa-key color-muted"></i>
+    </span>
+  </a>
+  <!-- Delete Account -->
   <a href="javascript:void(0)" onclick="$('#delete-member-{{ $member->id }}').submit()" data-toggle="tooltip" data-placement="top" title="{{ __('Delete') }}">
     <i class="fa fa-trash color-muted"></i>
   </a>

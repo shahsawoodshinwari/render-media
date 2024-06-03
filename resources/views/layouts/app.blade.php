@@ -31,6 +31,12 @@
     .translate-middle-y {
       transform: translateY(-50%);
     }
+
+    .btn-close {
+      background-color: none;
+      border: none;
+      font-size: large;
+    }
   </style>
 
   @stack('css')

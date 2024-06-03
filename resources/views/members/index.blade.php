@@ -2,6 +2,12 @@
 
 @push('css')
 <link href="{{ theme('plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<style>
+  #DataTables_Table_0_filter input {
+    border: 1px solid rgba(120, 130, 140, 0.13) !important;
+    border-radius: 0.25rem !important;
+  }
+</style>
 @endpush('css')
 
 @section('content')
