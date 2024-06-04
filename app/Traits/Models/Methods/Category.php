@@ -9,7 +9,7 @@ trait Category
    */
   public function uploadCover(): void
   {
-    $this->addMedia(storage_path('data/categories/cover.png'))
+    $this->addMedia(storage_path('data/categories/' . $this->slug . '.png'))
       ->preservingOriginal()
       ->toMediaCollection(self::COVER);
   }
