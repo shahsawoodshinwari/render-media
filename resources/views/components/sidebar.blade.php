@@ -13,7 +13,7 @@
         </a>
       </li>
       <li @class(['active' => request()->routeIs('freelancers.*')])>
-        <a href="javascript:void()" @class(['active' => request()->routeIs('freelancers.*')])>
+        <a href="{{ route('freelancers.index') }}" @class(['active' => request()->routeIs('freelancers.*')])>
           <i class="icon-globe-alt menu-icon"></i><span class="nav-text">{{ __('Freelancers') }}</span>
         </a>
       </li>
