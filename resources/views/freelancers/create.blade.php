@@ -156,7 +156,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="phone" class="form-label required">{{ __('Phone') }}</label>
-              <input type="text" class="form-control input-default bg-transparent text-white @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" placeholder="{{ __('Phone') }}" />
+              <input type="text" inputmode="numeric" class="form-control input-default bg-transparent text-white @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" placeholder="{{ __('Phone') }}" />
               @error('phone')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
