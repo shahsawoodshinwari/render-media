@@ -22,6 +22,7 @@ class LoginResource extends JsonResource
       'email'  => $this->email,
       'phone'  => $this->phone,
       'gender' => $this->gender,
+      'dob'    => $this->dob,
       'verified' => $this->hasVerifiedEmail(),
       'token'  => $this->when($request->withToken ?? true, $this->createPersonalAccessToken()->plainTextToken),
       'image'  => $this->avatar?->getUrl() ?? asset('assets/members/avatar.png'),
