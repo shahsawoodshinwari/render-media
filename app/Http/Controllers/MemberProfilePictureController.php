@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MemberUpdateProfilePictureRequest;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Http\Requests\MemberUpdateProfilePictureRequest;
 
 class MemberProfilePictureController extends Controller
 {
