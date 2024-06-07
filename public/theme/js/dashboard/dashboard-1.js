@@ -224,15 +224,17 @@
 
     let ctx = document.getElementById("chart_widget_2");
     ctx.height = 280;
+    const chartData = JSON.parse(ctx.dataset.chartData);
+
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+            labels: chartData.labels,
             type: 'line',
             defaultFontFamily: 'Montserrat',
             datasets: [{
-                data: [0, 15, 57, 12, 85, 10, 50],
-                label: "iPhone X",
+                data: chartData.members,
+                label: "Members",
                 backgroundColor: '#847DFA',
                 borderColor: '#847DFA',
                 borderWidth: 0.5,
@@ -241,8 +243,8 @@
                 pointBorderColor: 'transparent',
                 pointBackgroundColor: '#847DFA',
             }, {
-                label: "Pixel 2",
-                data: [0, 30, 5, 53, 15, 55, 0],
+                label: "Freelancers",
+                data: chartData.freelancers,
                 backgroundColor: '#F196B0',
                 borderColor: '#F196B0',
                 borderWidth: 0.5,

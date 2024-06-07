@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Freelancer\StatusEnum;
 use App\Models\Freelancer;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Enums\Freelancer\StatusEnum;
 
 class FreelancerStatusController extends Controller
 {

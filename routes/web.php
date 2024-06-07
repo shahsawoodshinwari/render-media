@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
   Route::patch('verify/{member}', [MemberVerificationController::class, 'verify'])->name('members.verify');
 
   Route::post('freelancers/{freelancer}/status', FreelancerStatusController::class)->name('freelancers.status');
-  Route::resource('freelancers', FreelancerController::class);
+  Route::resource('freelancers', FreelancerController::class)->except(['show']);
   Route::singleton('profile', ProfileController::class)->only(['show', 'edit', 'update']);
   Route::resource('members', MemberController::class);
   Route::singleton('members.password', MemberPasswordController::class)->only(['edit', 'update']);
