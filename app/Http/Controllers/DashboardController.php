@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\Freelancer;
 use Illuminate\Http\Request;
+use App\Services\DashboardChartsService;
 use App\Services\DashboardStatisticsService;
 
 class DashboardController extends Controller
@@ -21,11 +22,11 @@ class DashboardController extends Controller
     $latestFourMembers = Member::whereHas('bookings')->latest()->limit(4)->get();
 
     $statistics = (object) [
-      'members' => DashboardStatisticsService::members(),
-      'freelancers' => DashboardStatisticsService::freelancers(),
-      'progressBars' => DashboardStatisticsService::membersAndFreelancersThisDuration($request->get('duration')),
-      'chart' => DashboardStatisticsService::freelancersAndMembersChartData($request->get('duration')),
-      'bookings' => DashboardStatisticsService::bookings(),
+      'members'       => DashboardStatisticsService::members(),
+      'freelancers'   => DashboardStatisticsService::freelancers(),
+      'progressBars'  => DashboardChartsService::membersAndFreelancersThisDuration(duration: $request->get(key: 'duration', default: 'month')),
+      'chart'         => DashboardChartsService::freelancersAndMembersChartData(duration: $request->get(key: 'duration', default: 'month')),
+      'bookings'      => DashboardStatisticsService::bookings(),
     ];
 
     return response()->view('dashboard', compact('latestSevenFreelancers', 'latestFourMembers', 'statistics'));
