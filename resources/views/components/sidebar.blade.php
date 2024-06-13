@@ -17,7 +17,12 @@
           <i class="icon-globe-alt menu-icon"></i><span class="nav-text">{{ __('Freelancers') }}</span>
         </a>
       </li>
-      <li class="nav-label">Apps</li>
+      <li @class(['active' => request()->routeIs('categories.*')])>
+        <a href="{{ route('categories.index') }}" @class(['active' => request()->routeIs('categories.*')])>
+          <i class="icon-grid menu-icon"></i><span class="nav-text">{{ __('Categories') }}</span>
+        </a>
+      </li>
+      <li class="nav-label">{{ __('CMS') }}</li>
       <li>
         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
           <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>

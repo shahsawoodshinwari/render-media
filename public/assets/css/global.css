@@ -28,3 +28,13 @@
   border: 1px solid rgba(120, 130, 140, 0.13) !important;
   border-radius: 0.25rem !important;
 }
+
+.text-decoration-underline {
+  text-decoration: underline !important;
+}
+
+.text-truncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

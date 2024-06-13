@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\Freelancer\StatusEnum;
+use App\Traits\Factories\FakePhoneNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FreelancerFactory extends Factory
 {
+  use FakePhoneNumber;
+
   /**
    * Define the model's default state.
    *
@@ -21,8 +24,8 @@ class FreelancerFactory extends Factory
       'first_name'  => fake()->firstName(),
       'last_name'   => fake()->lastName(),
       'speciality'  => fake()->jobTitle(),
-      'experience'  => fake()->year(),
-      'phone'       => fake()->phoneNumber(),
+      'experience'  => fake()->numberBetween(1, 5),
+      'phone'       => $this->phoneNumber(),
       'portfolio'   => fake()->url(),
       'status'      => (fake()->randomElement(StatusEnum::cases()))->value,
     ];

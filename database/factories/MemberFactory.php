@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\GenderEnum;
+use App\Traits\Factories\FakePhoneNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MemberFactory extends Factory
 {
+  use FakePhoneNumber;
+
   /**
    * Define the model's default state.
    *

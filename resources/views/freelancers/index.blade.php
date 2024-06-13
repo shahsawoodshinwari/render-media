@@ -2,11 +2,6 @@
 
 @push('css')
 <link href="{{ theme('plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-<style>
-.sweet-alert.showSweetAlert.visible {
-  filter: invert(0.8);
-}
-</style>
 @endpush('css')
 
 @section('content')
@@ -31,15 +26,25 @@
               <td data-cell="experience" class="text-nowrap">{{ $freelancer->experience }}</td>
               <td data-cell="phone">{{ $freelancer->phone }}</td>
               <td data-cell="status">
-                <form action="{{ route('freelancers.status', $freelancer) }}" method="POST">
-                  @csrf
-                  <select style="width: 80%;" class="form-control input-default bg-transparent text-white" name="status" required aria-labelledby="status-cell" onchange="this.form.submit()">
-                    <option value="">{{ __('Select Status') }}</option>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-<?php echo match ($freelancer->status->value) {
+                    'Active' => 'success',
+                    'Inactive' => 'warning',
+                    'Suspended' => 'danger',
+                    'Pending' => 'info',
+                    default => 'secondary'
+                  }; ?>" data-toggle="dropdown" aria-expanded="false">
+                    <option value="">{{ $freelancer->status }}</option>
+                  </button>
+                  <form action="{{ route('freelancers.status', $freelancer) }}" method="post" class="dropdown-menu">
+                    @csrf
                     @foreach (\App\Enums\Freelancer\StatusEnum::values() as $status)
-                    <option <?php echo $freelancer->status->value == $status ? 'selected' : ''; ?>>{{ $status }}</option>
+                    @if ($freelancer->status->value != $status)
+                    <input type="submit" class="dropdown-item" name="status" value="{{ $status }}">
+                    @endif
                     @endforeach
-                  </select>
-                </form>
+                  </form>
+                </div>
               </td>
               <td data-cell="portfolio">
                 <a href="{{ $freelancer->portfolio }}" class="btn btn-sm btn-primary" target="_blank">{{ __('View Portfolio') }}</a>

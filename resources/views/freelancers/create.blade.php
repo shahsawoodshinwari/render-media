@@ -4,29 +4,6 @@
 <link rel="stylesheet" href="{{ theme('css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ theme('css/select2-bootstrap4.min.css') }}">
 <style>
-  .select2-container--bootstrap4 .select2-selection {
-    background-color: transparent !important;
-    min-height: 45px;
-  }
-
-  .select2-dropdown {
-    background-color: #27394F;
-  }
-
-  .select2-search--dropdown .select2-search__field {
-    background-color: transparent !important;
-    color: white !important;
-  }
-
-  .form-group:has([for="speciality"]) *:focus {
-    box-shadow: none !important;
-  }
-
-  .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
-    color: white !important;
-    padding-block-start: 6px;
-  }
-
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -38,23 +15,14 @@
     -moz-appearance: textfield;
   }
 
-
-  /* Remove the white background color from the select options */
-  select {
+  .select2-container--bootstrap4 .select2-selection {
     background-color: transparent !important;
+    min-height: 45px;
   }
 
-  select option {
-    background-color: transparent !important;
-  }
 
-  /* Ensure the text color remains visible */
-  select {
-    color: inherit !important;
-  }
-
-  select option {
-    color: inherit !important;
+  .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+    padding-block-start: 6px;
   }
 </style>
 @endpush('css')
@@ -69,23 +37,21 @@
 
     document.querySelector('input[name="phone"]').addEventListener('blur', (event) => {
       var phoneInput = document.querySelector('input[name="phone"]');
-      var phoneInputParent = document.querySelector('input[name="phone"]').parentElement;
-
+      var phoneInputParent = phoneInput.parentElement;
       var phoneNumber = phoneInput.value.trim();
       var uaePhonePattern = /^(?:50|52|54|55|56|58|2|3|4|6|7|9)\d{7}$/;
-      var errorShown = false;
 
-      if (!uaePhonePattern.test(phoneNumber) && !errorShown && phoneNumber.length > 0) {
+      var existingError = phoneInputParent.querySelector('.text-danger.phone-error');
+
+      if (!uaePhonePattern.test(phoneNumber) && !existingError) {
         const errorContainer = document.createElement('div');
         phoneInput.classList.add('is-invalid');
-        errorContainer.classList.add('text-danger');
+        errorContainer.classList.add('text-danger', 'phone-error');
         errorContainer.textContent = "{{ __('Please enter a valid phone number. Example: 501234567') }}";
         phoneInputParent.appendChild(errorContainer);
-        errorShown = true;
-      } else {
+      } else if (uaePhonePattern.test(phoneNumber) && existingError) {
         phoneInput.classList.remove('is-invalid');
-        phoneInputParent.querySelector('.text-danger').remove();
-        errorShown = false;
+        existingError.remove();
       }
     });
   });
@@ -107,7 +73,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="first_name" class="form-label required">{{ __('First Name') }}</label>
-              <input type="text" class="form-control input-default bg-transparent text-white @error('first_name') is-invalid @enderror" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="{{ __('First Name') }}" />
+              <input type="text" class="form-control input-default bg-transparent @error('first_name') is-invalid @enderror" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="{{ __('First Name') }}" />
               @error('first_name')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -118,7 +84,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="last_name" class="form-label required">{{ __('Last Name') }}</label>
-              <input type="text" class="form-control input-default bg-transparent text-white @error('last_name') is-invalid @enderror" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="{{ __('Last Name') }}" />
+              <input type="text" class="form-control input-default bg-transparent @error('last_name') is-invalid @enderror" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="{{ __('Last Name') }}" />
               @error('last_name')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -129,7 +95,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="speciality" class="form-label required">{{ __('Speciality ') }}</label>
-              <select class="form-control select2 input-default bg-transparent text-white @error('speciality') is-invalid @enderror" name="speciality" id="speciality">
+              <select class="form-control select2 input-default bg-transparent @error('speciality') is-invalid @enderror" name="speciality" id="speciality">
                 <option value="">{{ __('Select Speciality') }}</option>
                 @foreach($specialities as $speciality)
                 <option <?php echo old('speciality') == $speciality->id ? 'selected' : ''; ?>>{{ $speciality->name }}</option>
@@ -145,7 +111,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="experience" class="form-label required">{{ __('Experience') }}</label>
-              <input type="number" inputmode="numeric" min="0.1" class="form-control input-default bg-transparent text-white @error('experience') is-invalid @enderror" name="experience" id="experience" value="{{ old('experience') }}" placeholder="{{ __('Experience') }}" />
+              <input type="number" inputmode="numeric" step="1" min="1" class="form-control input-default bg-transparent @error('experience') is-invalid @enderror" name="experience" id="experience" value="{{ old('experience') }}" placeholder="{{ __('Experience') }}" />
               @error('experience')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -156,7 +122,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="phone" class="form-label required">{{ __('Phone') }}</label>
-              <input type="text" inputmode="numeric" class="form-control input-default bg-transparent text-white @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" placeholder="{{ __('Phone') }}" />
+              <input type="text" inputmode="numeric" class="form-control input-default bg-transparent @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" placeholder="{{ __('Phone') }}" />
               @error('phone')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -167,7 +133,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="portfolio" class="form-label required">{{ __('Portfolio') }}</label>
-              <input type="url" class="form-control input-default bg-transparent text-white @error('portfolio') is-invalid @enderror" name="portfolio" id="portfolio" placeholder="{{ __('Portfolio') }}" />
+              <input type="url" class="form-control input-default bg-transparent @error('portfolio') is-invalid @enderror" name="portfolio" id="portfolio" value="{{ old('portfolio') }}" placeholder="{{ __('Portfolio') }}" />
               @error('portfolio')
               <div class="invalid-feedback">{{ $message }}</div>
               @enderror
