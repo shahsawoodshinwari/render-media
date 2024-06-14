@@ -13,8 +13,8 @@ return new class () extends Migration {
     Schema::create('pages', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->text('contents');
-      $table->boolean('published')->default(false);
+      $table->longText('contents');
+      $table->boolean('published')->default(true);
       $table->timestamps();
     });
   }

@@ -4,8 +4,11 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CMS\FAQController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CMS\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\SubCategoryController;
@@ -28,7 +31,14 @@ Route::middleware('auth')->group(function () {
 
   Route::post('freelancers/{freelancer}/status', FreelancerStatusController::class)->name('freelancers.status');
 
+  Route::prefix('cms')->name('cms.')->group(function () {
+    Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
+    Route::put('pages/{page}', [PageController::class, 'update'])->name('pages.update');
 
+    Route::resource('faqs', FAQController::class)->except(['show']);
+  });
+
+  Route::resource('bookings', BookingController::class)->only(['index', 'edit', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);
   Route::resource('members', MemberController::class);
