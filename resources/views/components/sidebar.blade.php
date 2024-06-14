@@ -17,6 +17,11 @@
           <i class="icon-globe-alt menu-icon"></i><span class="nav-text">{{ __('Freelancers') }}</span>
         </a>
       </li>
+      <li @class(['active'=> request()->routeIs('bookings.*')])>
+        <a href="{{ route('bookings.index') }}" @class(['active'=> request()->routeIs('bookings.*')])>
+          <i class="icon-clock menu-icon"></i><span class="nav-text">{{ __('Bookings') }}</span>
+        </a>
+      </li>
       <li @class(['active'=> request()->routeIs('categories.*')])>
         <a href="{{ route('categories.index') }}" @class(['active'=> request()->routeIs('categories.*')])>
           <i class="icon-grid menu-icon"></i><span class="nav-text">{{ __('Categories') }}</span>

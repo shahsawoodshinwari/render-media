@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CMS\FAQController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('faqs', FAQController::class)->except(['show']);
   });
 
+  Route::resource('bookings', BookingController::class)->only(['index', 'edit', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);
   Route::resource('members', MemberController::class);

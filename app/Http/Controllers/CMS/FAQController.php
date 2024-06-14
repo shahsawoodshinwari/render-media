@@ -58,7 +58,7 @@ class FAQController extends Controller
   public function update(FaqRequest $request, FAQ $faq)
   {
     $faq->update($request->validated());
-    
+
     return redirect()->route('cms.faqs.index')->with('success', __('FAQ updated successfully'));
   }
 
