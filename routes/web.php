@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CMS\FAQController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CMS\PageController;
@@ -29,8 +30,12 @@ Route::middleware('auth')->group(function () {
 
   Route::post('freelancers/{freelancer}/status', FreelancerStatusController::class)->name('freelancers.status');
 
-  Route::get('cms/pages/{page}', [PageController::class, 'show'])->name('cms.pages.show');
-  Route::put('cms/pages/{page}', [PageController::class, 'update'])->name('cms.pages.update');
+  Route::prefix('cms')->name('cms.')->group(function () {
+    Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
+    Route::put('pages/{page}', [PageController::class, 'update'])->name('pages.update');
+
+    Route::resource('faqs', FAQController::class)->except(['show']);
+  });
 
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);

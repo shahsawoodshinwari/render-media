@@ -4,9 +4,9 @@ namespace App\Http\Controllers\CMS;
 
 use App\Models\CMS\Page;
 use App\Enums\CMS\PageEnum;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePageRequest;
-use Illuminate\Support\Str;
 
 class PageController extends Controller
 {

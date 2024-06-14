@@ -33,8 +33,8 @@
           <i class="icon-layers menu-icon"></i><span class="nav-text">{{ __('About Us') }}</span>
         </a>
       </li>
-      <li>
-        <a href="widgets.html">
+      <li @class(['active'=> request()->routeIs('cms.faqs.*')])>
+        <a href="{{ route('cms.faqs.index') }}" @class(['active'=> request()->routeIs('cms.faqs.*')])>
           <i class="icon-question menu-icon"></i><span class="nav-text">{{ __('FAQs') }}</span>
         </a>
       </li>
