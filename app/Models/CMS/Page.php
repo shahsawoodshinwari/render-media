@@ -22,6 +22,13 @@ class Page extends Model
   use DynamicUpdateTrait;
 
   /**
+   * The attributes that aren't mass assignable.
+   *
+   * @var array
+   */
+  protected $guarded = ["id"];
+
+  /**
    * Get the attributes that should be cast.
    *
    * @var array<string, string>
