@@ -80,7 +80,7 @@
       <div class="card">
         <div class="card-body">
           <div class="text-center">
-            <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" class="rounded-circle" alt="">
+            <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="45" class="rounded-circle" alt="">
             <h5 class="mt-3 mb-1">{{ $member->name }}</h5>
             <p class="text-truncated">{{ $member->email }}</p>
             <a href="javascript:void()" class="btn btn-sm btn-warning">{{ __('Bookings') }}</a>
@@ -109,7 +109,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($latestSevenFreelancers as $freelancer)
+                  @forelse ($latestSevenFreelancers as $freelancer)
                   <tr>
                     <td>{{ $freelancer->name }}</td>
                     <td>{{ $freelancer->experience }}</td>
@@ -120,7 +120,11 @@
                       <a href="{{  $freelancer->portfolio }}" class="btn btn-sm btn-primary">{{ __('View Portfolio') }}</a>
                     </td>
                   </tr>
-                  @endforeach
+                  @empty
+                  <tr>
+                    <td colspan="6" class="text-center">{{ __('No freelancers added in the system.') }}</td>
+                  </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -32,8 +34,16 @@ class CategoryController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreCategoryRequest $request)
   {
+    DB::transaction(function () use ($request) {
+      $category = Category::create($request->validated());
+
+      if ($request->file('cover')) {
+        $category->addMediaFromRequest('cover')->toMediaCollection($category::COVER);
+      }
+    });
+
     return redirect()->route('categories.index')->with('success', __('Category created successfully'));
   }
 
@@ -42,7 +52,7 @@ class CategoryController extends Controller
    */
   public function edit(Category $category)
   {
-    $category->load(['children']);
+    $category->load(['cover']);
 
     return view('categories.edit', compact('category'));
   }
@@ -50,8 +60,16 @@ class CategoryController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Category $category)
+  public function update(UpdateCategoryRequest $request, Category $category)
   {
+    DB::transaction(function () use ($request, $category) {
+      $category->update($request->validated());
+
+      if ($request->file('cover')) {
+        $category->addMediaFromRequest('cover')->toMediaCollection($category::COVER);
+      }
+    });
+
     return redirect()->route('categories.index')->with('success', __('Category updated successfully'));
   }
 
@@ -60,7 +78,10 @@ class CategoryController extends Controller
    */
   public function destroy(Category $category)
   {
-    $category->delete();
+    DB::transaction(function () use ($category) {
+      $category->children()->forceDelete();
+      $category->forceDelete();
+    });
 
     return redirect()->route('categories.index')->with('success', __('Category deleted successfully'));
   }

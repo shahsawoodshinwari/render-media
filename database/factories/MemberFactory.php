@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Member;
 use App\Enums\GenderEnum;
 use App\Traits\Factories\FakePhoneNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,5 +29,17 @@ class MemberFactory extends Factory
       'gender'     => fake()->randomElement(GenderEnum::values()),
       'password'   => 'password',
     ];
+  }
+
+  /**
+   * Configure the model factory.
+   */
+  public function configure(): static
+  {
+    return $this->afterMaking(function (Member $model) {
+      // ...
+    })->afterCreating(function (Member $model) {
+      $model->uploadRandomAvatar();
+    });
   }
 }
