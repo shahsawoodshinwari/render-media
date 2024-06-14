@@ -19,7 +19,7 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="password" class="form-label required">{{ __('Password') }}</label>
-                    <input type="password" class="form-control input-default bg-transparent text-white @error('password') is-invalid @enderror" name="password" id="password" placeholder="{{ __('Password') }}" required autocomplete="new-password" />
+                    <input type="password" class="form-control input-default bg-transparent @error('password') is-invalid @enderror" name="password" id="password" placeholder="{{ __('Password') }}" required autocomplete="new-password" />
                     <div class="form-text text-muted">
                       {{ __('Ensure your account is using a long, random password to stay secure.') }}
                     </div>
@@ -34,7 +34,7 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="password-confirm" class="form-label required">{{ __('Confirm Password') }}</label>
-                    <input type="password" class="form-control input-default bg-transparent text-white" name="password_confirmation" id="password-confirm" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password" />
+                    <input type="password" class="form-control input-default bg-transparent" name="password_confirmation" id="password-confirm" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password" />
                   </div>
                 </div>
 

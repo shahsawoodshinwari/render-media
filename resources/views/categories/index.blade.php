@@ -22,7 +22,7 @@
             <tr>
               <td data-cell="id">{{ $category->id }}</td>
               <td data-cell="cover">
-                <img src="{{ $category->cover?->getUrl() }}" width="50px" class="rounded-circle h-auto" alt="{{ $category->name }}">
+                <img src="{{ $category->cover?->getUrl() }}" width="50px" class="" alt="{{ $category->name }}">
               </td>
               <td data-cell="category" class="text-nowrap">{{ $category->name }}</td>
               <td data-cell="slug">{{ $category->slug }}</td>
