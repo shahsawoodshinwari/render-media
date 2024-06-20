@@ -37,17 +37,26 @@
                 </a>
               </td>
               <td data-cell="Payment Status">
-                {{ $booking->payment_status }}
+                <select name="payment_status" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                  @foreach(\App\Enums\Booking\PaymentStatusEnum::values() as $option)
+                  <option <?php echo $booking->payment_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                  @endforeach
+                </select>
               </td>
               <td data-cell="Status">
-                {{ $booking->request_status }}
+              <select name="request_status" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                  @foreach(\App\Enums\Booking\RequestStatusEnum::values() as $option)
+                  <option <?php echo $booking->request_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                  @endforeach
+                </select>
               </td>
               <td data-cell="Additional Details">
                 {{ $booking->additional_details }}
               </td>
-              <td>
-                @include('bookings.actions')
-              </td>
+              <form class="d-none" id="{{ $booking->booking_id }}" action="{{ route('bookings.update', $booking->id) }}" method="post">
+                @csrf
+                @method('PUT')
+              </form>
             </tr>
             @endforeach
           <tfoot>

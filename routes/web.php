@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('faqs', FAQController::class)->except(['show']);
   });
 
-  Route::resource('bookings', BookingController::class)->only(['index', 'edit', 'update']);
+  Route::resource('bookings', BookingController::class)->only(['index', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);
   Route::resource('members', MemberController::class);

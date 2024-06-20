@@ -17,7 +17,7 @@
 
                 <!-- email -->
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                  <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus placeholder="Email">
                   @error('email')
                   <div class="invalid-feedback">{{ $message }}</div>
                   @enderror

@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+use App\Enums\Booking\PaymentStatusEnum;
+use App\Enums\Booking\RequestStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBookingRequest extends FormRequest
@@ -22,7 +25,8 @@ class UpdateBookingRequest extends FormRequest
   public function rules(): array
   {
     return [
-      //
+      'payment_status' => ['nullable', Rule::in(PaymentStatusEnum::values())],
+      'request_status' => ['nullable', Rule::in(RequestStatusEnum::values())],
     ];
   }
 }

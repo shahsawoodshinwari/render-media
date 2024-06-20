@@ -19,20 +19,12 @@ class BookingController extends Controller
   }
 
   /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Booking $booking)
-  {
-    return view('bookings.edit', compact('booking'));
-  }
-
-  /**
    * Update the specified resource in storage.
    */
   public function update(UpdateBookingRequest $request, Booking $booking)
   {
     $booking->update($request->validated());
 
-    return redirect()->route('bookings.index')->withSuccess('Booking successfully updated.');
+    return redirect()->route('bookings.index')->with('success', 'Booking successfully updated.');
   }
 }
