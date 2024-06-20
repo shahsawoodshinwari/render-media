@@ -11,5 +11,4 @@
   <td>{{ __('Payment Status') }}</td>
   <td>{{ __('Status') }}</td>
   <td>{{ __('Additional Details') }}</td>
-  <td>{{ __('Actions') }}</td>
 </tr>
