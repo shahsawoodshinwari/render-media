@@ -21,8 +21,8 @@
             <tr>
               <td data-cell="booking id">{{ $booking->booking_id }}</td>
               <td data-cell="Member">{{ $booking->member_first_name }} {{ $booking->member_last_name }}</td>
-              <td data-cell="Category">{{ $booking->category->name }}</td>
-              <td data-cell="Sub Category">{{ $booking->subCategory->name }}</td>
+              <td data-cell="Category">{{ $booking->category?->name }}</td>
+              <td data-cell="Sub Category">{{ $booking->subCategory?->name }}</td>
               <td data-cell="Email">{{ $booking->member_email }}</td>
               <td data-cell="Phone">{{ $booking->member_phone }}</td>
               <td data-cell="Date & Time" class="text-nowrap">
