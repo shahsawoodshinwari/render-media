@@ -3,11 +3,12 @@
   'count',
   'date',
   'icon',
-  'gradient'
+  'gradient',
+  'url' => '#'
 ])
 
-<div class="col-lg-3 col-sm-6">
-  <div class="card {{ $gradient }}">
+<div class="col-lg-4 col-md-6">
+  <a class="card {{ $gradient }}" href="{{ $url }}">
     <div class="card-body">
       <h3 class="card-title text-white">{{ $title }}</h3>
       <div class="d-flex justify-content-between align-items-center">
@@ -18,5 +19,5 @@
       </div>
       <p class="text-white mb-0">{{ $date }}</p>
     </div>
-  </div>
+  </a>
 </div>

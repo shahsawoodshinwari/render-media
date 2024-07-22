@@ -37,14 +37,14 @@
                 </a>
               </td>
               <td data-cell="Payment Status">
-                <select name="payment_status" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                <select name="payment_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
                   @foreach(\App\Enums\Booking\PaymentStatusEnum::values() as $option)
                   <option <?php echo $booking->payment_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
                   @endforeach
                 </select>
               </td>
               <td data-cell="Status">
-              <select name="request_status" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                <select name="request_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
                   @foreach(\App\Enums\Booking\RequestStatusEnum::values() as $option)
                   <option <?php echo $booking->request_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
                   @endforeach

@@ -27,7 +27,7 @@
               <td data-cell="category" class="text-nowrap">{{ $category->name }}</td>
               <td data-cell="slug">{{ $category->slug }}</td>
               <td data-cell="sub categories" class="text-nowrap">
-                <a href="{{ route('categories.sub-categories.index', $category->id) }}">{{ $category->number_of_sub_categories }}</a>
+                <a href="{{ route('categories.sub-categories.index', $category->slug) }}">{{ $category->number_of_sub_categories }}</a>
               </td>
               <td>
                 @include('categories.actions')
