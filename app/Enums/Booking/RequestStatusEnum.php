@@ -12,4 +12,5 @@ enum RequestStatusEnum: string
   case ACCEPTED    = 'Accepted';
   case CANCELLED   = 'Cancelled';
   case RESCHEDULED = 'Rescheduled';
+  case COMPLETED   = 'Completed';
 }

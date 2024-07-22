@@ -13,16 +13,16 @@
 <div class="container-fluid mt-3">
   <div class="row">
     <!-- Members -->
-    <x-dashboard.main-card title="{{ __('Members') }}" gradient="gradient-1" icon="fa fa-users" count="{{ $statistics->members->count }}" date="{{ $statistics->members->date }}" />
+    <x-dashboard.main-card title="{{ __('Members') }}" url="{{ route('members.index') }}" gradient="gradient-1" icon="fa fa-users" count="{{ $statistics->members->count }}" date="{{ $statistics->members->date }}" />
 
     <!-- Freelancers -->
-    <x-dashboard.main-card title="{{ __('Freelancers') }}" gradient="gradient-3" icon="fa fa-briefcase" count="{{ $statistics->freelancers->count }}" date="{{ $statistics->freelancers->date }}" />
+    <x-dashboard.main-card title="{{ __('Freelancers') }}" url="{{ route('freelancers.index') }}" gradient="gradient-3" icon="fa fa-briefcase" count="{{ $statistics->freelancers->count }}" date="{{ $statistics->freelancers->date }}" />
 
     <!-- Bookings -->
-    <x-dashboard.main-card title="{{ __('Bookings') }}" gradient="gradient-2" icon="fa fa-shopping-cart" count="{{ $statistics->bookings->count }}" date="{{ $statistics->bookings->date }}" />
+    <x-dashboard.main-card title="{{ __('Bookings') }}" url="{{ route('bookings.index') }}" gradient="gradient-2" icon="fa fa-shopping-cart" count="{{ $statistics->bookings->count }}" date="{{ $statistics->bookings->date }}" />
 
     <!-- Customer Satisfaction -->
-    <x-dashboard.main-card title="Customer Satisfaction" gradient="gradient-4" icon="fa fa-heart" count="99%" date="Jan - March 2019" />
+    {{--<x-dashboard.main-card title="Customer Satisfaction" gradient="gradient-4" icon="fa fa-heart" count="99%" date="Jan - March 2019" />--}}
   </div>
 
   <div class="row">
@@ -111,11 +111,23 @@
                 <tbody>
                   @forelse ($latestSevenFreelancers as $freelancer)
                   <tr>
-                    <td>{{ $freelancer->name }}</td>
+                    <td>
+                      <a href="{{ route('freelancers.edit', $freelancer->id) }}" class="text-decoration-underline">{{ $freelancer->name }}</a>
+                    </td>
                     <td>{{ $freelancer->experience }}</td>
                     <td>{{ $freelancer->speciality }}</td>
                     <td>{{ $freelancer->phone }}</td>
-                    <td>{{ $freelancer->status }}</td>
+                    <td>
+                      <button class="btn btn-sm btn-<?php echo match ($freelancer->status->value) {
+                                                      'Active' => 'success',
+                                                      'Inactive' => 'warning',
+                                                      'Suspended' => 'danger',
+                                                      'Pending' => 'info',
+                                                      default => 'secondary'
+                                                    }; ?>">
+                        {{ $freelancer->status }}
+                      </button>
+                    </td>
                     <td>
                       <a href="{{  $freelancer->portfolio }}" class="btn btn-sm btn-primary">{{ __('View Portfolio') }}</a>
                     </td>
@@ -134,7 +146,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row d-none">
     <div class="col-lg-3 col-sm-6">
       <div class="card">
         <div class="social-graph-wrapper widget-facebook">
