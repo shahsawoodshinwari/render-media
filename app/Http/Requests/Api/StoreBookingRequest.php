@@ -32,6 +32,7 @@ class StoreBookingRequest extends FormRequest
       'lng'   => ['required', 'numeric'],
       'date'  => ['required', 'date'],
       'time'  => ['required', 'date_format:H:i'],
+      'address' => ['nullable', 'string', 'max:255'],
       'member_first_name' => ['required', new NameRule(), 'string', 'max:255'],
       'member_last_name'  => ['required', new NameRule(), 'string', 'max:255'],
       'member_email'  => ['required', 'string', 'email', 'max:255'],
