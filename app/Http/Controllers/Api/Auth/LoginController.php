@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Enums\Auth\GuardEnum;
+use App\Events\CreateOrUpdateFirebaseTokenEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LoginResource;
@@ -15,6 +16,8 @@ class LoginController extends Controller
   public function login(LoginRequest $request)
   {
     if (Auth::guard(GuardEnum::MEMBERS->value)->attempt($request->only('email', 'password'), $request->remember)) {
+
+      event(new CreateOrUpdateFirebaseTokenEvent(Auth::guard(GuardEnum::MEMBERS)->user(), $request->new_fcm_token, $request->old_fcm_token));
 
       return response()->json(
         LoginResource::make(Auth::guard(GuardEnum::MEMBERS->value)->user())

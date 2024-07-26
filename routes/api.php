@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\FirebaseRefreshTokenController;
 
 Route::name('api.')->group(function () {
   Route::post('login', [LoginController::class, 'login']);
@@ -29,6 +30,7 @@ Route::name('api.')->group(function () {
     Route::post('email/resend', [VerificationController::class, 'resend']);
     Route::post('email/verify', [VerificationController::class, 'verify']);
     Route::post('logout', [LoginController::class, 'logout']);
+    Route::post('refresh-fcm-token', FirebaseRefreshTokenController::class);
 
     Route::middleware('verified')->group(function () {
       Route::post('update-password', PasswordController::class);
