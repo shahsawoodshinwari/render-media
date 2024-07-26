@@ -1,5 +1,17 @@
 @extends('layouts.app', ['title' => 'Members - Details'])
 
+@push('css')
+<link href="{{ theme('plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<style>
+  .table-striped thead th,
+  .table-striped tbody td,
+  .table-striped tfoot td,
+  .table-striped tfoot th {
+    text-wrap: nowrap !important;
+  }
+</style>
+@endpush('css')
+
 @section('content')
 <div class="container-fluid">
   <div class="row">
@@ -11,7 +23,7 @@
               <img class="cursor-pointer rounded-circle" src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="80" height="80" alt="">
             </label>
             <div class="media-body">
-              <h3 class="mb-0">{{ $member->name }}</h3>
+              <h4 class="mb-0">{{ $member->name }}</h4>
             </div>
           </div>
 
@@ -21,111 +33,77 @@
             <input type="file" name="avatar" onchange="this.form.submit();" id="avatar" accept="image/*" class="d-none">
           </form>
 
-          <h4>{{ __('About Me') }}</h4>
+          <h4 class="text-center text-uppercase text-muted">{{ __('About Me') }}</h4>
           <ul class="card-profile__info">
-            <li class="mb-1"><strong class="text-dark mr-4">{{ __('Phone') }}</strong> <span>{{ $member->phone }}</span></li>
-            <li><strong class="text-dark mr-4">{{ __('Email') }}</strong> <span>{{ $member->email }}</span></li>
+            <li class=""><strong class="text-dark mr-4">{{ __('Phone') }}:</strong></li>
+            <li class="text-right mb-1"><span>{{ $member->phone }}</span></li>
+            <li><strong class="text-dark mr-4">{{ __('Email') }}:</strong></li>
+            <li class="text-right"><span>{{ $member->email }}</span></li>
           </ul>
+          <a href="#" class="btn btn-danger w-100">
+            <i class="fa fa-pencil"></i> {{ __('Edit') }}
+          </a>
         </div>
       </div>
     </div>
     <div class="col-lg-8 col-xxl-9">
       <div class="card">
         <div class="card-body">
-          <form action="#" class="form-profile">
-            <div class="form-group">
-              <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-            </div>
-            <div class="d-flex align-items-center">
-              <ul class="mb-0 form-profile__icons">
-                <li class="d-inline-block">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                </li>
-                <li class="d-inline-block">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                </li>
-                <li class="d-inline-block">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                </li>
-                <li class="d-inline-block">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                </li>
-              </ul>
-              <button class="btn btn-primary px-3 ml-4">Send</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <div class="media media-reply">
-            <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-            <div class="media-body">
-              <div class="d-sm-flex justify-content-between mb-2">
-                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                <div class="media-reply__link">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                  <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
-                </div>
-              </div>
-
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-              <ul>
-                <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
-                <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
-                <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
-                <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
-              </ul>
-
-              <div class="media mt-3">
-                <img class="mr-3 circle-rounded circle-rounded" src="images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
-                <div class="media-body">
-                  <div class="d-sm-flex justify-content-between mb-2">
-                    <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                    <div class="media-reply__link">
-                      <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                      <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                      <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                    </div>
-                  </div>
-                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                </div>
-              </div>
-            </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title">{{ __('Bookings List') }}</h4>
           </div>
-
-          <div class="media media-reply">
-            <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-            <div class="media-body">
-              <div class="d-sm-flex justify-content-between mb-2">
-                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                <div class="media-reply__link">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                  <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                </div>
-              </div>
-
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-            </div>
-          </div>
-
-          <div class="media media-reply">
-            <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-            <div class="media-body">
-              <div class="d-sm-flex justify-content-between mb-2">
-                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                <div class="media-reply__link">
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                  <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                  <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-                </div>
-              </div>
-
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-            </div>
+          <div class="table-responsive no-padding">
+            <table class="table table-striped table-bordered zero-configuration text-center">
+              <thead>
+                @include('bookings.headers')
+              </thead>
+              <tbody>
+                @foreach ($member->bookings as $booking)
+                <tr>
+                  <td data-cell="booking id">{{ $booking->booking_id }}</td>
+                  <td data-cell="Member">{{ $booking->member_first_name }} {{ $booking->member_last_name }}</td>
+                  <td data-cell="Category">{{ $booking->category?->name }}</td>
+                  <td data-cell="Sub Category">{{ $booking->subCategory?->name }}</td>
+                  <td data-cell="Email">{{ $booking->member_email }}</td>
+                  <td data-cell="Phone">{{ $booking->member_phone }}</td>
+                  <td data-cell="Date & Time" class="text-nowrap">
+                    {{ $booking->date?->format('d M, Y') }} {{ $booking->time?->format('h:i a') }}
+                  </td>
+                  <td data-cell="Shooting Type">
+                    {{ $booking->shooting_type }}
+                  </td>
+                  <td data-cell="Location from lat & lng">
+                    <a href="https://www.google.com/maps/place/{{ $booking->lat }},{{ $booking->lng }}" target="_blank">
+                      <i class="icon-map"></i> {{ __('Show on map') }}
+                    </a>
+                  </td>
+                  <td data-cell="Payment Status">
+                    <select name="payment_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                      @foreach(\App\Enums\Booking\PaymentStatusEnum::values() as $option)
+                      <option <?php echo $booking->payment_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td data-cell="Status">
+                    <select name="request_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                      @foreach(\App\Enums\Booking\RequestStatusEnum::values() as $option)
+                      <option <?php echo $booking->request_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td data-cell="Additional Details">
+                    {{ $booking->additional_details }}
+                  </td>
+                  <form class="d-none" id="{{ $booking->booking_id }}" action="{{ route('bookings.update', $booking->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                  </form>
+                </tr>
+                @endforeach
+              <tfoot>
+                @include('bookings.headers')
+              </tfoot>
+            </table>
           </div>
         </div>
       </div>
@@ -133,3 +111,9 @@
   </div>
 </div>
 @endsection
+
+@push('js')
+<script src="{{ theme('plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ theme('plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ theme('plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
+@endpush('js')

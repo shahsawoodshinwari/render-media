@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Events\CreateOrUpdateFirebaseTokenEvent;
 use App\Models\Member;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LoginResource;
@@ -13,6 +14,9 @@ class RegisterController extends Controller
   {
     $member = Member::create($request->validated());
     $member->sendEmailVerificationNotification();
+
+    // Create or Update Firebase Token
+    event(new CreateOrUpdateFirebaseTokenEvent($member, $request->new_fcm_token, $request->old_fcm_token));
 
     return response()->json(
       LoginResource::make($member)

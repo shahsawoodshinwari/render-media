@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Auth\GuardEnum;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,8 @@ use App\Enums\Booking\PaymentStatusEnum;
 use App\Enums\Booking\RequestStatusEnum;
 use App\Http\Requests\Api\StoreBookingRequest;
 use App\Http\Requests\Api\RescheduleBookingRequest;
+use App\Notifications\PushNotification;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -39,6 +42,8 @@ class BookingController extends Controller
       'payment_status' => PaymentStatusEnum::UNPAID,
       ...$request->validated(),
     ]);
+
+    Auth::guard(GuardEnum::MEMBERS->value)->user()->notify(new PushNotification('New booking request', 'Thanks for submitting your request. Our team will get in touch with you shortly.'));
 
     return response()->json([
       'message' => 'Thanks for submitting your request. Our team will get in touch with you shortly.',

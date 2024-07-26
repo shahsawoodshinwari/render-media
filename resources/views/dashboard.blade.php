@@ -80,7 +80,7 @@
       <div class="card">
         <div class="card-body">
           <div class="text-center">
-            <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="45" class="rounded-circle" alt="">
+            <img src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="45" height="45" class="rounded-circle" alt="">
             <h5 class="mt-3 mb-1">{{ $member->name }}</h5>
             <p class="text-truncated">{{ $member->email }}</p>
             <a href="javascript:void()" class="btn btn-sm btn-warning">{{ __('Bookings') }}</a>

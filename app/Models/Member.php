@@ -7,6 +7,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use App\Notifications\VerifyEmail;
 use App\Traits\Notifications\Notifiable;
+use App\Traits\Models\FirebaseTokenable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\ResetPasswordNotification;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
 use App\Traits\Models\Attributes\Member as AttributesMember;
+use App\Contracts\FirebaseTokenable as FirebaseTokenableContract;
 
 /**
  * Represents a member of the application.
@@ -42,7 +44,7 @@ use App\Traits\Models\Attributes\Member as AttributesMember;
  *   - sendPasswordResetNotification($token): Sends a password reset notification to the user.
  *   - registerMediaCollections(): Registers the media collections for the user.
  */
-class Member extends Authenticatable implements MustVerifyEmail, HasMedia
+class Member extends Authenticatable implements MustVerifyEmail, HasMedia, FirebaseTokenableContract
 {
   use HasFactory;
   use Notifiable;
@@ -51,6 +53,7 @@ class Member extends Authenticatable implements MustVerifyEmail, HasMedia
   use HasManyMember;
   use MethodsMember;
   use AttributesMember;
+  use FirebaseTokenable;
   use DynamicUpdateTrait;
   use InteractsWithMedia;
 
