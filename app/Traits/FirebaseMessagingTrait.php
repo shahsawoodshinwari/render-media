@@ -129,11 +129,11 @@ trait FirebaseMessagingTrait
     }
     // Prepare the response
     $response = [
-        'code' => $code,
-        'status' => $status,
-        'successCount' => $successCount,
-        'failureCount' => $failureCount,
-        'message' => $message,
+      'code' => $code,
+      'status' => $status,
+      'successCount' => $successCount,
+      'failureCount' => $failureCount,
+      'message' => $message,
     ];
 
     return $response;

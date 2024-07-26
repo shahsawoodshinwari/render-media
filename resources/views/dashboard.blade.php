@@ -119,12 +119,12 @@
                     <td>{{ $freelancer->phone }}</td>
                     <td>
                       <button class="btn btn-sm btn-<?php echo match ($freelancer->status->value) {
-                                                      'Active' => 'success',
-                                                      'Inactive' => 'warning',
-                                                      'Suspended' => 'danger',
-                                                      'Pending' => 'info',
-                                                      default => 'secondary'
-                                                    }; ?>">
+                        'Active' => 'success',
+                        'Inactive' => 'warning',
+                        'Suspended' => 'danger',
+                        'Pending' => 'info',
+                        default => 'secondary'
+                      }; ?>">
                         {{ $freelancer->status }}
                       </button>
                     </td>
