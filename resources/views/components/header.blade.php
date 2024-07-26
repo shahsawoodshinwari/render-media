@@ -82,59 +82,44 @@
         </li>
         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
             <i class="mdi mdi-bell-outline"></i>
-            <span class="badge badge-pill gradient-2">3</span>
+            <span class="badge badge-pill gradient-2">{{ auth()->user()->notifications->count() > 9 ? '9+' : auth()->user()->notifications->count() }}</span>
           </a>
           <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
             <div class="dropdown-content-heading d-flex justify-content-between">
-              <span class="">2 New Notifications</span>
+              <span class="">{{ auth()->user()->notifications->count() > 0 ? auth()->user()->notifications->count() . ' New Notifications' : 'No New Notifications' }}</span>
               <a href="javascript:void()" class="d-inline-block">
-                <span class="badge badge-pill gradient-2">5</span>
+                <span class="badge badge-pill gradient-2">{{ auth()->user()->notifications->count() }}</span>
               </a>
             </div>
             <div class="dropdown-content-body">
               <ul>
+                @forelse(auth()->user()->notifications as $notification)
                 <li>
                   <a href="javascript:void()">
                     <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                     <div class="notification-content">
-                      <h6 class="notification-heading">Events near you</h6>
-                      <span class="notification-text">Within next 5 days</span>
+                      <h6 class="notification-heading">{{ $notification->data['message'] }}</h6>
+                      <span class="notification-text">{{ $notification->created_at->diffForHumans() }}</span>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:void()">
-                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                    <div class="notification-content">
-                      <h6 class="notification-heading">Event Started</h6>
-                      <span class="notification-text">One hour ago</span>
-                    </div>
-                  </a>
-                </li>
+                @empty
                 <li>
                   <a href="javascript:void()">
                     <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                     <div class="notification-content">
-                      <h6 class="notification-heading">Event Ended Successfully</h6>
-                      <span class="notification-text">One hour ago</span>
+                      <h6 class="notification-heading">Enjoy!</h6>
+                      <span class="notification-text">Nothing to show</span>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:void()">
-                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                    <div class="notification-content">
-                      <h6 class="notification-heading">Events to Join</h6>
-                      <span class="notification-text">After two days</span>
-                    </div>
-                  </a>
-                </li>
+                @endforelse
               </ul>
 
             </div>
           </div>
         </li>
-        <li class="icons dropdown d-none d-md-flex">
+        {{--<li class="icons dropdown d-none d-md-flex">
           <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
             <span>English</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
           </a>
@@ -146,16 +131,16 @@
               </ul>
             </div>
           </div>
-        </li>
+        </li>--}}
         <li class="icons dropdown">
           <div class="user-img c-pointer position-relative" data-toggle="dropdown">
             <span class="activity active"></span>
-            <img src="{{ theme('images/user/1.png') }}" height="40" width="40" alt="">
+            <img src="{{ auth()->user()->avatar?->getUrl() }}" onerror="this.src=this.dataset.fallbackImage" data-fallback-image="{{ asset('assets/members/avatar.png') }}" height="40" width="40" alt="">
           </div>
           <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
             <div class="dropdown-content-body">
               <ul>
-                <li>
+                {{--<li>
                   <a href="{{ route('profile.show') }}"><i class="icon-user"></i> <span>Profile</span></a>
                 </li>
                 <li>
@@ -168,8 +153,8 @@
                 <hr class="my-2">
                 <li>
                   <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                </li>
-                <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                </li>--}}
+                <li><a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="icon-key"></i> <span>Logout</span></a></li>
               </ul>
             </div>
           </div>
@@ -178,3 +163,6 @@
     </div>
   </div>
 </div>
+<form action="{{ route('logout') }}" method="POST" id="logout-form">
+  @csrf
+</form>

@@ -2,8 +2,10 @@
 
 namespace App\Observers;
 
+use App\Models\User;
 use App\Models\Booking;
 use App\Enums\Booking\RequestStatusEnum;
+use App\Notifications\SuperAdminDBNotification;
 use App\Notifications\BookingCreatedNotification;
 use App\Notifications\BookingPendingNotification;
 use App\Notifications\BookingAcceptedNotification;
@@ -20,6 +22,12 @@ class BookingObserver
   {
     if ($booking->member) {
       $booking->member->notify(new BookingCreatedNotification($booking));
+    }
+
+    // Notify Admins as well
+    $admins = User::get();
+    if ($admins->isNotEmpty()) {
+      $admins->each(fn($admin) => $admin->notify(new SuperAdminDBNotification($booking)));
     }
   }
 
