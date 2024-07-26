@@ -15,8 +15,7 @@ class PushNotification extends Notification
     public $message,
     public $extra = [],
     public $tokens = null,
-  ) {
-  }
+  ) {}
 
   public function via($notifiable)
   {

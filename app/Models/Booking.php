@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Observers\BookingObserver;
 use App\Enums\Booking\ShootingTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\Booking\PaymentStatusEnum;
 use App\Enums\Booking\RequestStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
 use App\Traits\Models\Methods\Booking as MethodsBooking;
 use App\Traits\Models\BelongsTo\Booking as BelongsToBooking;
 
+#[ObservedBy([BookingObserver::class])]
 class Booking extends Model
 {
   use HasFactory;

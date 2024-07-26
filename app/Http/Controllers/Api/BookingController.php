@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\Auth\GuardEnum;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Enums\Auth\GuardEnum;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\BookingResource;
+use App\Notifications\PushNotification;
 use App\Enums\Booking\PaymentStatusEnum;
 use App\Enums\Booking\RequestStatusEnum;
 use App\Http\Requests\Api\StoreBookingRequest;
 use App\Http\Requests\Api\RescheduleBookingRequest;
-use App\Notifications\PushNotification;
-use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
