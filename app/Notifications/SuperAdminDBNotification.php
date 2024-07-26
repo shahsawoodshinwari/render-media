@@ -14,8 +14,10 @@ class SuperAdminDBNotification extends Notification
    * Create a new notification instance.
    */
   public function __construct(
-    public ?Booking $booking
-  ) {}
+    public ?Booking $booking,
+    public ?string $message = null
+  ) {
+  }
 
   /**
    * Get the notification's delivery channels.
@@ -35,7 +37,7 @@ class SuperAdminDBNotification extends Notification
   public function toArray(object $notifiable): array
   {
     return [
-      'message' => 'Super Admin DB Notification',
+      'message' => $this->message ?: 'Super Admin DB Notification',
       'extra' => ['booking' => $this->booking],
     ];
   }
