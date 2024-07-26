@@ -27,7 +27,8 @@ class BookingObserver
     // Notify Admins as well
     $admins = User::get();
     if ($admins->isNotEmpty()) {
-      $admins->each(fn($admin) => $admin->notify(new SuperAdminDBNotification($booking)));
+      $message = 'New booking request from ' . $booking->member->name;
+      $admins->each(fn($admin) => $admin->notify(new SuperAdminDBNotification($booking, $message)));
     }
   }
 
