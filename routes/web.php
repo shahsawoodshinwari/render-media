@@ -9,6 +9,7 @@ use App\Http\Controllers\CMS\FAQController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CMS\PageController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\SubCategoryController;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('faqs', FAQController::class)->except(['show']);
   });
 
+  Route::resource('contact-us', ContactUsController::class)->only(['index', 'update']);
   Route::resource('bookings', BookingController::class)->only(['index', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);
