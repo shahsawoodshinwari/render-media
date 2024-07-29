@@ -20,9 +20,19 @@
             @foreach ($requests as $request)
             <tr>
               <td data-cell="ID">RM#{{ str_pad($request->id, 3, '0', STR_PAD_LEFT) }}</td>
-              <td data-cell="Name">{{ $request->first_name . ' ' . $request->last_name }}</td>
-              <td data-cell="Email">{{ $request->email }}</td>
-              <td data-cell="Phone">{{ $request->phone }}</td>
+              <td data-cell="Name">
+                {{ $request->first_name . ' ' . $request->last_name }}
+              </td>
+              <td data-cell="Email">
+                <a href="mailto:{{ $request->email }}&subject=Re: {{ $request->reason }}">
+                  {{ $request->email }}
+                </a>
+              </td>
+              <td data-cell="Phone">
+                <a href="tel:{{ $request->phone }}">
+                  {{ $request->phone }}
+                </a>
+              </td>
               <td data-cell="Reason">{{ $request->reason }}</td>
               <td data-cell="Date Submitted">{{ $request->created_at->format('d M, Y') }}</td>
             </tr>
