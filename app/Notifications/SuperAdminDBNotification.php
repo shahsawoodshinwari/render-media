@@ -16,8 +16,7 @@ class SuperAdminDBNotification extends Notification
   public function __construct(
     public ?Booking $booking,
     public ?string $message = null
-  ) {
-  }
+  ) {}
 
   /**
    * Get the notification's delivery channels.

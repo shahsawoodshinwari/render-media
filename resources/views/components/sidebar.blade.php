@@ -27,19 +27,28 @@
           <i class="icon-grid menu-icon"></i><span class="nav-text">{{ __('Categories') }}</span>
         </a>
       </li>
-      <li @class(['active', request()->routeIs('contact-us.index')])>
-        <a href="{{ route('contact-us.index') }}" @class(['active', request()->routeIs('contact-us.index')])>
+      <li @class(['active'=> request()->routeIs('contact-us.index')])>
+        <a href="{{ route('contact-us.index') }}" @class(['active'=> request()->routeIs('contact-us.index')])>
           <i class="icon-phone menu-icon"></i><span class="nav-text">{{ __('Contact Us') }}</span>
+        </a>
+      </li>
+      <li @class(['active'=> request()->routeIs('tickets.*')])>
+        <a href="{{ route('tickets.index') }}" @class(['active'=> request()->routeIs('tickets.*')])>
+          <i class="icon-bell menu-icon"></i>
+          <span class="nav-text">{{ __('Tickets') }}</span>
         </a>
       </li>
       <li class="nav-label">{{ __('CMS') }}</li>
       <li @class(['active'=> request()->url() == route('cms.pages.show', 'terms-and-conditions')])>
-        <a href="{{ route('cms.pages.show', 'terms-and-conditions') }}" @class(['active'=> request()->url() == route('cms.pages.show', 'terms-and-conditions')])>
+        <a href="{{ route('cms.pages.show', 'terms-and-conditions') }}" @class([ 'active'=> request()->url() ==
+          route('cms.pages.show', 'terms-and-conditions')
+          ])>
           <i class="icon-list menu-icon"></i><span class="nav-text">{{ __('Terms & Conditions') }}</span>
         </a>
       </li>
       <li @class(['active'=> request()->url() == route('cms.pages.show', 'about-us')])>
-        <a href="{{ route('cms.pages.show', 'about-us') }}" @class(['active'=> request()->url() == route('cms.pages.show', 'about-us')])>
+        <a href="{{ route('cms.pages.show', 'about-us') }}" @class(['active'=> request()->url() ==
+          route('cms.pages.show', 'about-us')])>
           <i class="icon-layers menu-icon"></i><span class="nav-text">{{ __('About Us') }}</span>
         </a>
       </li>

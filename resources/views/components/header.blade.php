@@ -9,7 +9,8 @@
     <div class="header-left d-none">
       <div class="input-group icons">
         <div class="input-group-prepend">
-          <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+          <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i
+              class="mdi mdi-magnify"></i></span>
         </div>
         <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
         <div class="drop-down animated flipInX d-md-none">
@@ -21,7 +22,7 @@
     </div>
     <div class="header-right">
       <ul class="clearfix">
-        <li class="icons dropdown">
+        {{--<li class="icons dropdown">
           <a href="javascript:void(0)" data-toggle="dropdown">
             <i class="mdi mdi-email-outline"></i>
             <span class="badge badge-pill gradient-1">3</span>
@@ -79,14 +80,16 @@
 
             </div>
           </div>
-        </li>
+        </li>--}}
         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
             <i class="mdi mdi-bell-outline"></i>
-            <span class="badge badge-pill gradient-2">{{ auth()->user()->notifications->count() > 9 ? '9+' : auth()->user()->notifications->count() }}</span>
+            <span class="badge badge-pill gradient-2">{{ auth()->user()->notifications->count() > 9 ? '9+' :
+              auth()->user()->notifications->count() }}</span>
           </a>
           <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
             <div class="dropdown-content-heading d-flex justify-content-between">
-              <span class="">{{ auth()->user()->notifications->count() > 0 ? auth()->user()->notifications->count() . ' New Notifications' : 'No New Notifications' }}</span>
+              <span class="">{{ auth()->user()->notifications->count() > 0 ? auth()->user()->notifications->count() . '
+                New Notifications' : 'No New Notifications' }}</span>
               <a href="javascript:void()" class="d-inline-block">
                 <span class="badge badge-pill gradient-2">{{ auth()->user()->notifications->count() }}</span>
               </a>
@@ -115,7 +118,6 @@
                 </li>
                 @endforelse
               </ul>
-
             </div>
           </div>
         </li>
@@ -135,7 +137,8 @@
         <li class="icons dropdown">
           <div class="user-img c-pointer position-relative" data-toggle="dropdown">
             <span class="activity active"></span>
-            <img src="{{ auth()->user()->avatar?->getUrl() }}" onerror="this.src=this.dataset.fallbackImage" data-fallback-image="{{ asset('assets/members/avatar.png') }}" height="40" width="40" alt="">
+            <img src="{{ auth()->user()->avatar?->getUrl() }}" onerror="this.src=this.dataset.fallbackImage"
+              data-fallback-image="{{ asset('assets/members/avatar.png') }}" height="40" width="40" alt="">
           </div>
           <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
             <div class="dropdown-content-body">
@@ -154,7 +157,9 @@
                 <li>
                   <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                 </li>--}}
-                <li><a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="icon-key"></i> <span>Logout</span></a></li>
+                <li><a href="javascript:void()"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i
+                      class="icon-key"></i> <span>Logout</span></a></li>
               </ul>
             </div>
           </div>
