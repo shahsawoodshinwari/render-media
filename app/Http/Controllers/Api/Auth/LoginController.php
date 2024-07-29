@@ -17,7 +17,7 @@ class LoginController extends Controller
   {
     if (Auth::guard(GuardEnum::MEMBERS->value)->attempt($request->only('email', 'password'), $request->remember)) {
 
-      event(new CreateOrUpdateFirebaseTokenEvent(Auth::guard(GuardEnum::MEMBERS)->user(), $request->new_fcm_token, $request->old_fcm_token));
+      event(new CreateOrUpdateFirebaseTokenEvent(Auth::guard(GuardEnum::MEMBERS->value)->user(), $request->new_fcm_token, $request->old_fcm_token));
 
       return response()->json(
         LoginResource::make(Auth::guard(GuardEnum::MEMBERS->value)->user())
