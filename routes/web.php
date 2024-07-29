@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CMS\FAQController;
 use App\Http\Controllers\ProfileController;
@@ -39,13 +40,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('faqs', FAQController::class)->except(['show']);
   });
 
-  Route::resource('contact-us', ContactUsController::class)->only(['index', 'update']);
   Route::resource('bookings', BookingController::class)->only(['index', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);
+  Route::resource('contact-us', ContactUsController::class)->only(['index', 'update']);
   Route::resource('freelancers', FreelancerController::class)->except(['show']);
   Route::resource('members', MemberController::class);
+  Route::resource('tickets', TicketController::class)->except(['create', 'store']);
+
   Route::singleton('members.password', MemberPasswordController::class)->only(['edit', 'update']);
   Route::singleton('members.profile-picture', MemberProfilePictureController::class)->only('update');
   Route::singleton('profile', ProfileController::class)->only(['show', 'edit', 'update']);
+
   Route::resource('categories.sub-categories', SubCategoryController::class)->except(['show'])->shallow();
 });

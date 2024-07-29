@@ -14,7 +14,7 @@
   <!-- Custom Stylesheet -->
   <link href="{{ theme('plugins/sweetalert/css/sweetalert.css') }}" rel="stylesheet">
   <link href="{{ theme('css/style.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/css/global.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/global.css') }}?v=2" rel="stylesheet">
 
   @stack('css')
 

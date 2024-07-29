@@ -43,3 +43,7 @@ input[readonly] {
   background-color: #f5f5f5 !important;
   cursor: not-allowed;
 }
+
+.gap-3 {
+  gap: 1rem !important;
+}

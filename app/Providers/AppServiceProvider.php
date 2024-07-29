@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Enums\TicketStatusEnum;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -29,7 +32,20 @@ class AppServiceProvider extends ServiceProvider
         : $rule;
     });
 
-    Request::macro('withToken', fn(bool $withToken = true) => Request::instance()
-      ->merge(['withToken' => $withToken]));
+    Request::macro(
+      'withToken',
+      fn(bool $withToken = true) => Request::instance()->merge(['withToken' => $withToken])
+    );
+
+    View::share(
+      'members',
+      Member::whereHas('tickets')
+        ->withCount([
+          'tickets as number_of_open_tickets' => fn($query) => $query->whereStatus(TicketStatusEnum::OPEN->value),
+          'tickets as number_of_closed_tickets' => fn($query) => $query->whereStatus(TicketStatusEnum::CLOSED->value),
+        ])
+        ->with(['avatar'])
+        ->get()
+    );
   }
 }
