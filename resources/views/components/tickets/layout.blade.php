@@ -36,9 +36,10 @@
         @if($members->isNotEmpty())
         <div class="col-md-4 overflow-y-auto mb-3 mb-md-0">
           @foreach ($members as $member)
+          @php($active = $member->id == request('member') || request()->route('ticket')->member_id == $member->id)
           <a href="{{ route('tickets.index', ['member' => $member->id]) }}" data-member="{{ $member->id }}">
             <div @class([ 'd-flex' , 'rounded' , 'px-1' , 'ticket-member' , 'cursor-pointer' , 'align-items-center'
-              , 'bg-info'=> $member->id == request('member')
+              , 'bg-info'=> $active
               , 'mb-3'=>
               !$loop->last
               ])>
@@ -50,7 +51,7 @@
               <h5 class="mb-0 mx-3">{{ $member->name }}</h5>
               <div class="ml-auto">
                 <span
-                  class="label <?php echo request()->get('member') == $member->id ? 'label-warning' : 'label-primary'; ?> min-w-58px d-flex align-items-center justify-content-between">
+                  class="label <?php echo $active ? 'label-warning' : 'label-primary'; ?> min-w-58px d-flex align-items-center justify-content-between">
                   <span data-toggle="tooltip" title="Closed Tickets">{{ $member->number_of_closed_tickets > 9 ? '9+' :
                     $member->number_of_closed_tickets }}</span>
                   <span class="mx-1">|</span>
