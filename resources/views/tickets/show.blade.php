@@ -61,37 +61,9 @@
   <div class="row g-3 mt-3 py-3 rounded" style="background-color: beige;gap: 5px;">
     @foreach($ticket->replies as $reply)
     @if($reply->author->is(auth()->user()))
-    <div class="col-9 col-md-7 mr-auto text-start">
-      <div style="position: relative;width: fit-content">
-        <div class="sent mr-auto rounded-3 px-3 py-2">
-          {{ $reply->content }}
-        </div>
-        <div class="ml-auto" style="width: fit-content;position: absolute;bottom: 0; right: 0">
-          <small>
-            <b>{{ __('You') }}</b>
-            {{ $reply->created_at->format('g:i A') }}
-          </small>
-        </div>
-        <div style="visibility: hidden">
-          <small>
-            <b>{{ __('You') }}</b>
-            {{ $reply->created_at->format('g:i A') }}
-          </small>
-        </div>
-      </div>
-    </div>
+    <x-tickets.message-sent :reply="$reply" />
     @else
-    <div class="col-9 col-md-7 ml-auto text-right">
-      <div class="received ml-auto rounded-3 px-3 py-2">
-        {{ $reply->content }}
-      </div>
-      <div class="text-right">
-        <small>
-          <b>{{ $reply->author->name }}</b>
-          {{ $reply->created_at->format('g:i A') }}
-        </small>
-      </div>
-    </div>
+    <x-tickets.message-received :reply="$reply" />
     @endif
     @endforeach
   </div>
