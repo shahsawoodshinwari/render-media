@@ -1,5 +1,23 @@
 <x-tickets.layout>
-  <div class="sticky-top bg-white">
+  <style>
+    .rounded-3 {
+      border-radius: 0.75rem !important;
+    }
+
+    .sent {
+      border-bottom-left-radius: 0 !important;
+      background-color: var(--secondary);
+      width: fit-content;
+      color: white;
+    }
+
+    .received {
+      border-bottom-right-radius: 0 !important;
+      background-color: var(--darkreader-neutral-text);
+      width: fit-content;
+    }
+  </style>
+  <div class="bg-white">
     <div class="d-flex justify-content-between align-items-center gap-3">
       <h4>{{ __('Ticket Details') }}</h4>
       <div class="label label-{{ $ticket->status == \App\Enums\TicketStatusEnum::OPEN ? 'primary' : 'warning' }}">
@@ -20,6 +38,7 @@
     </span>
     @endif
   </div>
+  @if($ticket->status == \App\Enums\TicketStatusEnum::OPEN)
   <hr />
   <form action="{{ route('tickets.update', $ticket) }}" method="post">
     @csrf
@@ -37,4 +56,44 @@
       <button type="submit" class="btn btn-danger">{{ __('Submit') }}</button>
     </div>
   </form>
+  @endif
+  @if($ticket->replies->isNotEmpty())
+  <div class="row g-3 mt-3 py-3 rounded" style="background-color: beige;gap: 5px;">
+    @foreach($ticket->replies as $reply)
+    @if($reply->author->is(auth()->user()))
+    <div class="col-9 col-md-7 mr-auto text-start">
+      <div style="position: relative;width: fit-content">
+        <div class="sent mr-auto rounded-3 px-3 py-2">
+          {{ $reply->content }}
+        </div>
+        <div class="ml-auto" style="width: fit-content;position: absolute;bottom: 0; right: 0">
+          <small>
+            <b>{{ __('You') }}</b>
+            {{ $reply->created_at->format('g:i A') }}
+          </small>
+        </div>
+        <div style="visibility: hidden">
+          <small>
+            <b>{{ __('You') }}</b>
+            {{ $reply->created_at->format('g:i A') }}
+          </small>
+        </div>
+      </div>
+    </div>
+    @else
+    <div class="col-9 col-md-7 ml-auto text-right">
+      <div class="received ml-auto rounded-3 px-3 py-2">
+        {{ $reply->content }}
+      </div>
+      <div class="text-right">
+        <small>
+          <b>{{ $reply->author->name }}</b>
+          {{ $reply->created_at->format('g:i A') }}
+        </small>
+      </div>
+    </div>
+    @endif
+    @endforeach
+  </div>
+  @endif
 </x-tickets.layout>

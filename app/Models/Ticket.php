@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\TicketStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Scopes\Ticket as TicketScopes;
+use App\Models\HasMany\Ticket as TicketHasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Shaka\DynamicUpdateTrait\Traits\DynamicUpdateTrait;
 use App\Traits\Models\BelongsTo\Ticket as TicketBelongsTo;
@@ -13,6 +14,7 @@ class Ticket extends Model
 {
   use HasFactory;
   use TicketScopes;
+  use TicketHasMany;
   use TicketBelongsTo;
   use DynamicUpdateTrait;
 

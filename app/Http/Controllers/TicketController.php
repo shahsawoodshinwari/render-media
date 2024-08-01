@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TicketStatusEnum;
 use App\Models\Member;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
+use App\Enums\TicketStatusEnum;
+use App\Models\User;
 use App\Notifications\PushNotification;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
   use ValidatesRequests;
-  
+
   /**
    * Display a listing of the resource.
    */
@@ -32,6 +33,8 @@ class TicketController extends Controller
    */
   public function show(Ticket $ticket)
   {
+    $ticket->load(['replies' => fn ($query) => $query->latest('created_at')]);
+
     return view('tickets.show', compact('ticket'));
   }
 
@@ -47,6 +50,12 @@ class TicketController extends Controller
     $ticket->update([
       'closed_at' => now(),
       'status' => TicketStatusEnum::CLOSED,
+    ]);
+
+    $ticket->replies()->create([
+      'content' => $request->get('message'),
+      'author_id' => auth()->user()->id,
+      'author_type' => User::class,
     ]);
 
     if ($ticket->member) {
