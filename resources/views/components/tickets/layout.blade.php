@@ -36,7 +36,7 @@
         @if($members->isNotEmpty())
         <div class="col-md-4 overflow-y-auto mb-3 mb-md-0">
           @foreach ($members as $member)
-          @php($active = $member->id == request('member') || request()->route('ticket')->member_id == $member->id)
+          @php($active = $member->id == request('member') || request()->route('ticket')?->member_id == $member->id)
           <a href="{{ route('tickets.index', ['member' => $member->id]) }}" data-member="{{ $member->id }}">
             <div @class([ 'd-flex' , 'rounded' , 'px-1' , 'ticket-member' , 'cursor-pointer' , 'align-items-center'
               , 'bg-info'=> $active
