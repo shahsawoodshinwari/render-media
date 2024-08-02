@@ -12,7 +12,7 @@ class ReplyController extends Controller
    */
   public function __invoke(Ticket $ticket)
   {
-    sleep(10);
+    sleep(1);
 
     $ticket->load(['replies' => fn ($query) => $query->latest('created_at')]);
 
