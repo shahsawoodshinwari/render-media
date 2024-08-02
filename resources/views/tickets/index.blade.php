@@ -26,7 +26,7 @@
   @forelse ($member->tickets as $item)
   <div @class(['alert', $item->status == \App\Enums\TicketStatusEnum::OPEN ? 'alert-primary' : 'alert-success'])
     role="alert">
-    <h4 class="alert-heading">{{ $item->title }}</h4>
+    <h4 class="alert-heading">[#{{ $item->ticket_id }}] {{ $item->title }}</h4>
     <p>{{ $item->description }}</p>
     <hr>
     <div class="d-flex align-items-center gap-3">

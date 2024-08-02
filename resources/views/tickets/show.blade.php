@@ -30,7 +30,7 @@
     </div>
     <hr />
   </div>
-  <h5>{{ $ticket->title }}</h5>
+  <h5>[#{{ $ticket->ticket_id }}] {{ $ticket->title }}</h5>
   <p class="text-muted">{{ $ticket->description }}</p>
   <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
     <span>
