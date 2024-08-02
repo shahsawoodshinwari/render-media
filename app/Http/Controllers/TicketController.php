@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Member;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Enums\TicketStatusEnum;
-use App\Models\User;
 use App\Notifications\PushNotification;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -47,29 +47,30 @@ class TicketController extends Controller
       'message' => ['required', 'max:1000'],
     ]);
 
-    $ticket->update([
-      'closed_at' => now(),
-      'status' => TicketStatusEnum::CLOSED,
-    ]);
-
     $ticket->replies()->create([
-      'content' => $request->get('message'),
-      'author_id' => auth()->user()->id,
+      'content'     => $request->get('message'),
+      'author_id'   => auth()->user()->id,
       'author_type' => User::class,
     ]);
 
     if ($ticket->member) {
-      $ticket->member->notify(new PushNotification('Ticket Closed', __('Your ticket has been closed.', ['message' => $request->get('message')])));
+      $ticket->member->notify(new PushNotification('Ticket Reply', __('Admin has replied to your ticket.'), ['message' => $request->get('message')]));
     }
 
-    return redirect()->route('tickets.show', $ticket)->with('success', __('Ticket closed successfully'));
+    return redirect()->route('tickets.show', $ticket)->with('success', __('Your message has been sent.'));
   }
 
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Ticket $ticket)
+  public function close(Ticket $ticket)
   {
-    //
+    $ticket->update([
+      'closed_at' => now(),
+      'status'    => TicketStatusEnum::CLOSED,
+    ]);
+
+    if ($ticket->member) {
+      $ticket->member->notify(new PushNotification('Ticket Closed', __('Your ticket has been closed.')));
+    }
+
+    return redirect()->route('tickets.show', $ticket)->with('success', __('Your ticket has been closed.'));
   }
 }

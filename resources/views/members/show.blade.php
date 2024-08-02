@@ -20,14 +20,17 @@
         <div class="card-body">
           <div class="media align-items-center mb-4">
             <label class="mr-3" for="avatar">
-              <img class="cursor-pointer rounded-circle" src="{{ $member->avatar?->getUrl() ?? asset('assets/members/avatar.png') }}" width="80" height="80" alt="">
+              <img class="cursor-pointer rounded-circle" src="{{ $member->avatar?->getUrl() }}"
+                data-fallback-image="{{ asset('assets/members/avatar.png') }}"
+                onerror="this.src=this.dataset.fallbackImage" width="80" height="80" alt="">
             </label>
             <div class="media-body">
               <h4 class="mb-0">{{ $member->name }}</h4>
             </div>
           </div>
 
-          <form action="{{ route('members.profile-picture.update', $member) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('members.profile-picture.update', $member) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <input type="file" name="avatar" onchange="this.form.submit();" id="avatar" accept="image/*" class="d-none">
@@ -78,23 +81,28 @@
                     </a>
                   </td>
                   <td data-cell="Payment Status">
-                    <select name="payment_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                    <select name="payment_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}"
+                      onchange="this.form.submit();">
                       @foreach(\App\Enums\Booking\PaymentStatusEnum::values() as $option)
-                      <option <?php echo $booking->payment_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                      <option <?php echo $booking->payment_status?->value == $option ? 'selected' : '' ?>>{{ $option }}
+                      </option>
                       @endforeach
                     </select>
                   </td>
                   <td data-cell="Status">
-                    <select name="request_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}" onchange="this.form.submit();">
+                    <select name="request_status" class="form-control w-75 py-0" form="{{ $booking->booking_id }}"
+                      onchange="this.form.submit();">
                       @foreach(\App\Enums\Booking\RequestStatusEnum::values() as $option)
-                      <option <?php echo $booking->request_status?->value == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                      <option <?php echo $booking->request_status?->value == $option ? 'selected' : '' ?>>{{ $option }}
+                      </option>
                       @endforeach
                     </select>
                   </td>
                   <td data-cell="Additional Details">
                     {{ $booking->additional_details }}
                   </td>
-                  <form class="d-none" id="{{ $booking->booking_id }}" action="{{ route('bookings.update', $booking->id) }}" method="post">
+                  <form class="d-none" id="{{ $booking->booking_id }}"
+                    action="{{ route('bookings.update', $booking->id) }}" method="post">
                     @csrf
                     @method('PUT')
                   </form>

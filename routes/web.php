@@ -18,10 +18,11 @@ use App\Http\Controllers\MemberPasswordController;
 use App\Http\Controllers\FreelancerStatusController;
 use App\Http\Controllers\MemberVerificationController;
 use App\Http\Controllers\MemberProfilePictureController;
+use App\Http\Controllers\ReplyController;
 
 Auth::routes(['verify' => true]);
 
-Route::get('generate-slug', fn(Request $request) => response()->json([
+Route::get('generate-slug', fn (Request $request) => response()->json([
   'slug' => Str::slug($request->text),
 ]));
 
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('faqs', FAQController::class)->except(['show']);
   });
+
+  Route::get('tickets/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
+  Route::post('tickets/{ticket}/replies', ReplyController::class)->name('tickets.replies');
 
   Route::resource('bookings', BookingController::class)->only(['index', 'update']);
   Route::resource('categories', CategoryController::class)->except(['show']);

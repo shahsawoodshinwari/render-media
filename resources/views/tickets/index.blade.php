@@ -42,7 +42,7 @@
         {{ __('View') }}
       </a>
       @if ($item->status == \App\Enums\TicketStatusEnum::OPEN)
-      <a href="#" class="btn btn-sm btn-danger">
+      <a href="{{ route('tickets.close', $item) }}" class="btn btn-sm btn-danger">
         {{ __('Close') }}
       </a>
       @endif

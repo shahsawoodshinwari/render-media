@@ -16,6 +16,10 @@
       background-color: var(--darkreader-neutral-text);
       width: fit-content;
     }
+
+    .min-w-126px {
+      min-width: 126px;
+    }
   </style>
   <div class="bg-white">
     <div class="d-flex justify-content-between align-items-center gap-3">
@@ -38,9 +42,8 @@
     </span>
     @endif
   </div>
-  @if($ticket->status == \App\Enums\TicketStatusEnum::OPEN)
   <hr />
-  <form action="{{ route('tickets.update', $ticket) }}" method="post">
+  <form class="mb-3" action="{{ route('tickets.update', $ticket) }}" method="post">
     @csrf
     @method('put')
     <p class="rounded border px-3 py-2 bg-light">
@@ -52,20 +55,60 @@
       <textarea class="form-control input-default bg-transparent @error('message') is-invalid @enderror" name="message"
         id="message" rows="3" required placeholder="{{ __('Your feedback goes here') }}">{{ old('message') }}</textarea>
     </div>
-    <div class="text-right">
-      <button type="submit" class="btn btn-danger">{{ __('Submit') }}</button>
+    <div class="row justify-content-end px-3" style="gap: 5px">
+      @if ($ticket->member)
+      <a href="{{ route('members.show', $ticket->member) }}" class="btn btn-secondary min-w-126px">
+        {{ __('User Details') }}
+      </a>
+      @endif
+      <div class="col-auto px-0">
+        <button type="button" class="btn min-w-126px btn-success refresh-chats d-flex gap-3 align-items-center">
+          <div>{{ __('Refresh Chats') }}</div>
+          <img src="{{ asset('assets/tickets/loading.gif') }}" alt="" style="display: none;width: 16px;">
+        </button>
+      </div>
+      @if($ticket->status == \App\Enums\TicketStatusEnum::OPEN)
+      <div class="col-auto px-0">
+        <a href="{{ route('tickets.close', $ticket) }}" class="btn min-w-126px btn-secondary">{{ __('Close Ticket')
+          }}</a>
+      </div>
+      @endif
+      <div class="col-auto px-0">
+        <button type="submit" class="btn min-w-126px btn-primary">{{ __('Submit') }}</button>
+      </div>
     </div>
   </form>
-  @endif
-  @if($ticket->replies->isNotEmpty())
-  <div class="row g-3 mt-3 py-3 rounded" style="background-color: beige;gap: 5px;">
-    @foreach($ticket->replies as $reply)
-    @if($reply->author->is(auth()->user()))
-    <x-tickets.message-sent :reply="$reply" />
-    @else
-    <x-tickets.message-received :reply="$reply" />
-    @endif
-    @endforeach
+  <div class="chats">
+    <x-tickets.chats :ticket="$ticket" />
   </div>
-  @endif
+  @push('js')
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('.refresh-chats').addEventListener('click', function (e) {
+        $('.refresh-chats').prop('disabled', true);
+        $('.refresh-chats img').show();
+
+        $.ajax({
+          type: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+          },
+          url: "{{ route('tickets.replies', $ticket) }}",
+          data: {},
+          success: function (data) {
+            // console.log(data);
+            $('.chats').html(data);
+            $('.refresh-chats').prop('disabled', false);
+            $('.refresh-chats img').hide();
+          },
+          error: function (data) {
+            console.log(data);
+            $('.refresh-chats').prop('disabled', false);
+            $('.refresh-chats img').hide();
+          }
+        });
+      });
+    });
+  </script>
+  @endpush
 </x-tickets.layout>
