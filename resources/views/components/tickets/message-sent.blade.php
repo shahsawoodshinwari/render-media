@@ -1,5 +1,5 @@
 @props(['reply'])
-<div class="col-9 col-md-7 mr-auto text-start">
+<div class="col-12 col-md-7 mr-auto text-start">
   <div style="position: relative;width: fit-content">
     <div class="sent mr-auto rounded-3 px-3 py-2">
       {{ $reply->content }}
