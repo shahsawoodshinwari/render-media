@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\FirebaseRefreshTokenController;
+use App\Http\Controllers\Api\ReplyController;
+use App\Http\Controllers\Api\TicketController;
 
 Route::name('api.')->group(function () {
   Route::post('login', [LoginController::class, 'login']);
@@ -36,12 +38,16 @@ Route::name('api.')->group(function () {
       Route::post('update-password', PasswordController::class);
       Route::post('update-profile-picture', [ProfileController::class, 'updateProfilePicture']);
       Route::post('bookings/{booking}/reschedule', [BookingController::class, 'reschedule']);
+      Route::post('tickets/{ticket}/close', [TicketController::class, 'close']);
+      Route::post('tickets/{ticket}/reopen', [TicketController::class, 'reopen']);
 
       Route::singleton('profile', ProfileController::class)->destroyable()->only(['show', 'update', 'destroy']);
 
       Route::apiResource('bookings', BookingController::class)->only(['index', 'store']);
       Route::apiResource('contact-us', ContactUsController::class)->only('store');
       Route::apiResource('categories', CategoryController::class)->only('index');
+      Route::apiResource('tickets', TicketController::class)->only(['index', 'store', 'show']);
+      Route::apiResource('tickets.reply', ReplyController::class)->only(['store']);
 
       Route::prefix('cms')->group(function () {
         Route::apiResource('faqs', FAQController::class)->only('index');
