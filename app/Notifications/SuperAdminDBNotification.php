@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Models\Booking;
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notification;
 
 class SuperAdminDBNotification extends Notification
@@ -14,9 +14,10 @@ class SuperAdminDBNotification extends Notification
    * Create a new notification instance.
    */
   public function __construct(
-    public ?Booking $booking,
+    public ?Model $model,
     public ?string $message = null
-  ) {}
+  ) {
+  }
 
   /**
    * Get the notification's delivery channels.
@@ -37,7 +38,7 @@ class SuperAdminDBNotification extends Notification
   {
     return [
       'message' => $this->message ?: 'Super Admin DB Notification',
-      'extra' => ['booking' => $this->booking],
+      'extra' => ['model' => $this->model],
     ];
   }
 }
