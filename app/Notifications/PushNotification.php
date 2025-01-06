@@ -26,7 +26,9 @@ class PushNotification extends Notification
 
   public function tokens(object $notifiable)
   {
-    return $this->tokens ?: $notifiable->fcmTokens;
+    $tokens = $this->tokens ?: $notifiable->firebaseTokens()->get()->map(fn($token) => $token->token)->toArray();
+
+    return $tokens;
   }
 
   public function toArray($notifiable)

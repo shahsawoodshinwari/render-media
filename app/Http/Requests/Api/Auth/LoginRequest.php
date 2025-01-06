@@ -21,6 +21,7 @@ class LoginRequest extends FormRequest
    */
   public function rules(): array
   {
+logger()->info(json_encode($this->all());
     return [
       'email'    => ['required', 'string', 'email'],
       'password' => ['required', 'string'],

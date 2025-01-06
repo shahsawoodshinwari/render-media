@@ -38,7 +38,8 @@ class SuperAdminDBNotification extends Notification
   {
     return [
       'message' => $this->message ?: 'Super Admin DB Notification',
-      'extra' => ['model' => $this->model],
+      'type'    => $this->model ? strtolower(class_basename($this->model)) : null,
+      'extra'   => ['model' => $this->model],
     ];
   }
 }

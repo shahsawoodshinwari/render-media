@@ -13,7 +13,9 @@ class BookingController extends Controller
    */
   public function index(Request $request)
   {
-    $bookings = Booking::latest()->get();
+    $bookings = Booking::latest()
+      ->when($request->input('booking_status'), fn($bookings) => $bookings->where('request_status', $request->input('booking_status')))
+      ->get();
 
     return view('bookings.index', compact('bookings'));
   }

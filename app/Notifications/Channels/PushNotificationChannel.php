@@ -18,6 +18,7 @@ class PushNotificationChannel
   {
     $notificationData = $notification->toArray($model);
     $tokens = $notification->tokens($model);
+\Log::info(json_encode($notificationData['extra']));
     if ($tokens) {
       $response = $this->sendNotificationToMultipleDevices(
         $tokens,

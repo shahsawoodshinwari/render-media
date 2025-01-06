@@ -26,6 +26,13 @@ Route::get('generate-slug', fn (Request $request) => response()->json([
   'slug' => Str::slug($request->text),
 ]));
 
+Route::prefix('mobile')->name('mobile.')->group(function () {
+  Route::view('/', 'mobile.home')->name('home');
+  Route::view('/bookings', 'mobile.bookings')->name('bookings');
+  Route::view('/tickets', 'mobile.tickets')->name('tickets');
+  Route::view('/profile', 'mobile.profile')->name('profile');
+});
+
 Route::middleware('auth')->group(function () {
   Route::get('/', DashboardController::class)->name('dashboard');
 

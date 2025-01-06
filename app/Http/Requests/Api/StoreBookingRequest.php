@@ -39,6 +39,7 @@ class StoreBookingRequest extends FormRequest
       'member_phone'  => ['required', 'string', 'phone:AE', 'max:255'],
       'shooting_type' => ['required', Rule::enum(ShootingTypeEnum::class)],
       'additional_notes'  => ['nullable', 'string', 'max:255'],
+      'sub_category_details' => ['nullable', 'string', 'max:255'],
     ];
   }
 }
