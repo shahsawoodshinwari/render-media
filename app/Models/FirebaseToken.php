@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\Models\HasOne\FirebaseToken as FirebaseTokenHasOne;
@@ -14,7 +14,7 @@ use App\Traits\Models\BelongsTo\FirebaseToken as FirebaseTokenBelongsTo;
 use App\Traits\Models\Attributes\FirebaseToken as FirebaseTokenAttributes;
 use App\Traits\Models\HasManyThrough\FirebaseToken as FirebaseTokenHasManyThrough;
 
-class FirebaseToken extends BaseModel
+class FirebaseToken extends Model
 {
   use HasFactory;
   use SoftDeletes;

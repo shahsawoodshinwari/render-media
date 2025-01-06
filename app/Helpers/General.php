@@ -7,5 +7,5 @@
  */
 function theme($file): string
 {
-  return asset("theme/$file");
+  return asset("public/theme/$file");
 }

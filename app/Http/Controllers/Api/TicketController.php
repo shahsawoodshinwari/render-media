@@ -22,7 +22,7 @@ class TicketController extends Controller
    */
   public function index()
   {
-    $tickets = Ticket::latest()->get();
+    $tickets = auth()->user()->tickets()->latest('updated_at')->get();
 
     return response()->json(TicketListResource::collection($tickets)->response()->getData(true));
   }
@@ -38,7 +38,7 @@ class TicketController extends Controller
       ...$request->validated(),
     ]);
 
-    auth()->user()->notify(new PushNotification('New ticket', 'Thanks for submitting your request. Our team will get in touch with you shortly.'));
+    auth()->user()->notify(new PushNotification('New ticket', 'Thanks for submitting your request. Our team will get in touch with you shortly.', ['type' => 'ticket']));
 
     return response()->json(TicketDetailResource::make($ticket));
   }

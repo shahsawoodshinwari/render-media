@@ -98,7 +98,7 @@
               <ul>
                 @forelse(auth()->user()->notifications()->latest()->limit(5)->get() as $notification)
                 <li>
-                  <a href="javascript:void()">
+                  <a href="{{ isset($notification->data['type']) ? ($notification->data['type'] == 'booking' ? route('bookings.index') : route('tickets.index')) : 'javascript:void()' }}">
                     <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
                     <div class="notification-content">
                       <h6 class="notification-heading">{{ $notification->data['message'] }}</h6>

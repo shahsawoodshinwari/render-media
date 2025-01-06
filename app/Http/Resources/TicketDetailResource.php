@@ -15,7 +15,7 @@ class TicketDetailResource extends JsonResource
   public function toArray(Request $request): array
   {
     if (!$this->relationLoaded('replies')) {
-      $this->load(['replies' => fn ($query) => $query->latest('created_at'), 'replies.author']);
+      $this->load(['replies' => fn ($query) => $query->orderBy('created_at', 'desc'), 'replies.author']);
     }
 
     return [

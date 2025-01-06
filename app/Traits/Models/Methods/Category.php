@@ -11,6 +11,7 @@ trait Category
   {
     $this->addMedia(storage_path('data/categories/' . $this->slug . '.png'))
       ->preservingOriginal()
+      ->usingName($this->slug . '.png')
       ->toMediaCollection(self::COVER);
   }
 }

@@ -41,9 +41,10 @@ class BookingController extends Controller
       'request_status' => RequestStatusEnum::PENDING,
       'payment_status' => PaymentStatusEnum::UNPAID,
       ...$request->validated(),
+      'additional_details' => $request->input('additional_notes'),
     ]);
 
-    Auth::guard(GuardEnum::MEMBERS->value)->user()->notify(new PushNotification('New booking request', 'Thanks for submitting your request. Our team will get in touch with you shortly.'));
+    auth()->user()->notify(new PushNotification('New booking request', 'Thanks for submitting your request. Our team will get in touch with you shortly.', ['type' => 'booking']));
 
     return response()->json([
       'message' => 'Thanks for submitting your request. Our team will get in touch with you shortly.',

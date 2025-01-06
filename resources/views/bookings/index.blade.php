@@ -2,15 +2,34 @@
 
 @push('css')
 <link href="{{ theme('plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<style>
+@media(max-width: 576px) {
+.filters .form-control {
+width: 100% !important;
+}
+}
+</style>
 @endpush('css')
 
 @section('content')
 <div class="container-fluid" style="padding-top: 30px;padding-bottom: 30px">
   <div class="card">
     <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center">
+      <form action="" class="d-flex align-items-center filters" style="flex-wrap: wrap;gap: 1rem">
         <h4 class="card-title">{{ __('Bookings List') }}</h4>
-      </div>
+               <select class="form-control rounded ml-auto" name="payment_status" style="width: 10.9rem;" onchange="this.form.submit();">
+                  <option value="">Filter payment status</option>
+                  @foreach(\App\Enums\Booking\PaymentStatusEnum::values() as $option)
+                  <option <?php echo request()->query('payment_status') == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                  @endforeach
+               </select>
+               <select class="form-control rounded" name="booking_status" style="width: 10.9rem;" onchange="this.form.submit();">
+                  <option value="">Filter booking status</option>
+                  @foreach(\App\Enums\Booking\RequestStatusEnum::values() as $option)
+                  <option <?php echo request()->query('booking_status') == $option ? 'selected' : '' ?>>{{ $option }}</option>
+                  @endforeach
+               </select>
+      </form>
       <div class="table-responsive no-padding">
         <table class="table table-striped table-bordered zero-configuration text-center">
           <thead>

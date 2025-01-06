@@ -22,11 +22,18 @@ use App\Http\Controllers\Api\TicketController;
 Route::name('api.')->group(function () {
   Route::post('login', [LoginController::class, 'login']);
   Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-  Route::post('password/reset', [ResetPasswordController::class, 'reset']);
+  Route::post('password/reset', [ResetPasswordController::class, 'reset'])->middleware('signed')->name('password.reset');
+  Route::post('password/otp/verify', [ResetPasswordController::class, 'verifyOtp']);
   Route::post('register', [RegisterController::class, 'register']);
   Route::post('become-freelancer', FreelanerController::class);
 
   Route::resource('sub-categories', SubCategoryController::class)->only('index');
+
+  Route::prefix('cms')->group(function () {
+    Route::apiResource('faqs', FAQController::class)->only('index');
+    Route::apiResource('pages/{page}', PageController::class)->only('index');
+  });
+
 
   Route::middleware('auth:sanctum')->group(function () {
     Route::post('email/resend', [VerificationController::class, 'resend']);
@@ -48,11 +55,6 @@ Route::name('api.')->group(function () {
       Route::apiResource('categories', CategoryController::class)->only('index');
       Route::apiResource('tickets', TicketController::class)->only(['index', 'store', 'show']);
       Route::apiResource('tickets.reply', ReplyController::class)->only(['store']);
-
-      Route::prefix('cms')->group(function () {
-        Route::apiResource('faqs', FAQController::class)->only('index');
-        Route::apiResource('pages/{page}', PageController::class)->only('index');
-      });
     });
   });
 });

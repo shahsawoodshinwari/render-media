@@ -26,6 +26,7 @@ class RegisterRequest extends FormRequest
    */
   public function rules(): array
   {
+    \Log::debug(json_encode($this->all()));
     return [
       'first_name' => ['required', 'string', 'max:255', new NameRule()],
       'last_name'  => ['required', 'string', 'max:255', new NameRule()],
